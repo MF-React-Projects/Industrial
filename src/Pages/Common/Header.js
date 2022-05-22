@@ -51,8 +51,7 @@ const Header = () => {
                             </Nav>
                             <div className="header-right">
                                 <Link to={'/login'} className='btn-default btnSm'>Login</Link>
-                                <Link to={'/register'}
-                                      className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
+                                <Link to={'/register'} className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
                             </div>
                         </Navbar.Collapse>
                     </Container>

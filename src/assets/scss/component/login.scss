@@ -1,0 +1,193 @@
+.ic-login-title {
+  padding: 35px 0;
+  border-bottom: 1px solid #F7F7F7;
+}
+
+.ic-login-content {
+  padding: 50px 0;
+}
+
+.ic-login-top {
+  p {
+    line-height: 24px;
+    margin-top: 25px;
+  }
+}
+
+.ic-login-field {
+  input {
+    padding: 22px 10px;
+    border-radius: 0;
+    border: 1px solid #9F9B99;
+    font-size: 15px;
+
+    &:focus {
+      border: 1px solid #2e3189;
+    }
+
+    &:last-child {
+      margin-bottom: 11px;
+    }
+  }
+
+  ::placeholder {
+    text-align: center;
+    font-size: 16px;
+    color: #d2d2d2;
+  }
+
+
+}
+
+.ic-round-checkbox {
+  p {
+
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+
+.ic-forget-text {
+
+  a {
+    color: #2e3189;
+
+
+    text-decoration: underline;
+  }
+}
+
+.ic-round-checkbox {
+  position: relative;
+}
+
+.ic-round-checkbox label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 18px;
+  left: 0;
+  position: absolute;
+  top: 5px;
+  width: 18px;
+}
+
+.ic-round-checkbox label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 4px;
+  opacity: 0;
+  position: absolute;
+  top: 4px;
+  transform: rotate(-45deg);
+  width: 9px;
+}
+
+
+.ic-round-checkbox input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.ic-round-checkbox input[type="checkbox"]:checked + label {
+  background-color: #2e3189;
+  border-color: #2e3189;
+}
+
+.ic-round-checkbox input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+.ic-login-bottom {
+  margin-top: -5px;
+
+  button {
+    width: 100%;
+    padding: 8px 0;
+    background: #2E3189;
+    border: 1px solid #2E3189;
+    border-radius: 0;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: black;
+    }
+
+  }
+
+  p {
+    margin: 35px 0 0 0;
+    color: #131420;
+  }
+
+  span {
+    a {
+      color: #2e3189;
+      text-decoration: underline;
+    }
+
+  }
+
+}
+
+.ic-registration-box {
+  background: #fff;
+  box-shadow: 0 2px 12px 0 rgba(20, 20, 28, 0.1);
+  padding: 30px 30px 30px 25px;
+
+}
+
+.checkout-popup-box {
+  position: fixed;
+  padding: 50px 0;
+  z-index: 999999;
+  background: rgba(1, 1, 1, 0.2);
+  width: 100%;
+
+  height: 100%;
+  transition: all 0.4s ease-in-out;
+}
+
+#ic-checkout-login-popup {
+  display: none;
+}
+
+.checkout-popup-row {
+  position: absolute;
+  width: 65%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  background: white;
+  box-shadow: 0 2px 12px 0 rgba(20, 20, 28, 0.1);
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.close-checkout-login {
+  position: absolute;
+  right: -14px;
+  top: -70px;
+  cursor: pointer;
+
+  i {
+    color: #fff;
+    background: #2e3189;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 7px 0 0 0;
+  }
+}
+
+.login-col {
+  display: block;
+  margin: auto;
+}

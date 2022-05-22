@@ -1,5 +1,7 @@
 .header-area {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px -4px;
+  border-style: solid;
+  border-color: #F9F9F9;
+  border-width: 1px 0 2px 0;
 
   .top-bar {
     background: $gray_color;
