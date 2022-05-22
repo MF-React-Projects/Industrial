@@ -29,9 +29,8 @@
   -webkit-box-shadow: none;
 }
 .btn-default.disabled, .btn-default:disabled {
-  color: #fff;
-  background-color: #e93737;
-  border-color: #e93737;
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 .btn-default.btn-white{
   background: transparent;

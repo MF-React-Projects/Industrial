@@ -1,43 +1,42 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import loginThumb from '../../assets/img/login.jpg';
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row, Spinner} from "react-bootstrap";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {useSignInWithEmailAndPassword, useSignInWithGoogle} from "react-firebase-hooks/auth";
+import {useCreateUserWithEmailAndPassword, useUpdateProfile} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import {useForm} from "react-hook-form";
-import Loading from "../Common/Loading";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [agree, setAgree] = useState(false);
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const {register, formState: {errors}, handleSubmit} = useForm();
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
-        if (user || gUser) {
+        if (user) {
             navigate(from, {replace: true});
         }
-    }, [user, gUser, from, navigate])
+    }, [user, from, navigate])
 
-    if (loading || gLoading) {
-        return <Loading/>
-    }
-    let loginError;
-    if (error || gError) {
-        loginError = <small className='text-danger'>{error?.message || gError?.message}</small>
+    let registerError;
+    if (error || updateError) {
+        registerError = <small className='text-danger'>{error?.message || updateError?.message}</small>
     }
 
-    const onSubmit = data => {
-        signInWithEmailAndPassword(data.email, data.password)
+    const onSubmit = async data => {
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({displayName: data.name});
     }
     return (
         <>
@@ -58,8 +57,25 @@ const Register = () => {
                                 <Col md={6}>
                                     <div className="ic-login-field">
                                         <form onSubmit={handleSubmit(onSubmit)}>
-                                            <div className="form-group mb-4">
-                                                <label className="label">Email</label>
+                                            <div className="form-group mb-3">
+                                                <label className="form-label">Your Name</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Your Name"
+                                                    className="form-control"
+                                                    {...register("name", {
+                                                        required: {
+                                                            value: true,
+                                                            message: 'Name is Required'
+                                                        }
+                                                    })}
+                                                />
+                                                <small className="text-danger">
+                                                    {errors.name?.type === 'required' && errors.name.message}
+                                                </small>
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label className="form-label">Email Address</label>
                                                 <input
                                                     type="email"
                                                     placeholder="Your Email"
@@ -80,8 +96,8 @@ const Register = () => {
                                                     {errors.email?.type === 'pattern' && errors.email.message}
                                                 </small>
                                             </div>
-                                            <div className="form-group mb-4">
-                                                <label className="label">Password</label>
+                                            <div className="form-group mb-3">
+                                                <label className="form-label">Password</label>
                                                 <input
                                                     type="password"
                                                     placeholder="Password"
@@ -102,29 +118,41 @@ const Register = () => {
                                                     {errors.password?.type === 'minLength' && errors.password.message}
                                                 </small>
                                             </div>
-                                            {loginError}
-                                            <div className="d-flex justify-content-between">
-                                                <div className="ic-round-checkbox">
-                                                    <input type="checkbox" id="checkbox"/>
-                                                    <label htmlFor="checkbox"></label>
-                                                    <p className="ic-registar-text">Accpect Privacy policy and terms & conditions </p>
-                                                </div>
+                                            {registerError}
+                                            <div className="form-check mb-3">
+                                                <input className="form-check-input" type="checkbox"
+                                                       onChange={() => setAgree(!agree)} id="flexCheckDefault"/>
+                                                <label className="form-check-label" htmlFor="flexCheckDefault">
+                                                    I agree to the Terms and Conditions
+                                                </label>
                                             </div>
-                                            <div className="ic-login-bottom text-center">
-                                                <button className='btn-default w-100' type="submit">Register</button>
-                                                <p>Already Have An Account? <Link to={'/login'}>Login Now</Link></p>
-                                            </div>
+                                            {
+                                                (loading || updating) ?
+                                                    <button className='btn-default w-100 mb-3' type="submit"
+                                                            disabled={!agree}>Register
+                                                        <Spinner
+                                                            as="span"
+                                                            animation="border"
+                                                            size="sm"
+                                                            role="status"
+                                                            aria-hidden="true"
+                                                            className='ms-2'
+                                                        />
+                                                    </button>
+                                                    :
+                                                    <button className='btn-default w-100 mb-3' type="submit"
+                                                            disabled={!agree}>Register</button>
+                                            }
+
+                                            <p>Already Have An Account? <Link to={'/login'}
+                                                                              className='text-decoration-underline'>Login
+                                                Now</Link></p>
                                         </form>
-                                        <div className="btn-group">
-                                            <button onClick={() => signInWithGoogle()} className="btn-default">Continue with Google</button>
-                                            <button onClick={() => signInWithGoogle()} className="btn-default">Continue with Google</button>
-                                        </div>
+                                        <SocialLogin/>
                                     </div>
                                 </Col>
                             </Row>
                         </div>
-
-
                     </div>
                 </Container>
             </section>
