@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import logo from '../../logo.png';
 import loginThumb from '../../assets/img/login.jpg';
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
