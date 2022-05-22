@@ -8,32 +8,33 @@ import {useSignInWithEmailAndPassword, useSignInWithGoogle} from "react-firebase
 import {useForm} from "react-hook-form";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import Loading from "../Common/Loading";
+import auth from "../../firebase.init";
 
 const Login = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle();
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword();
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    ] = useSignInWithEmailAndPassword(auth);
+    const {register, formState: {errors}, handleSubmit} = useForm();
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
-        if(user || gUser) {
-            navigate(from, { replace: true });
+        if (user || gUser) {
+            navigate(from, {replace: true});
         }
     }, [user, gUser, from, navigate])
 
-    if(loading || gLoading){
+    if (loading || gLoading) {
         return <Loading/>
     }
-    let signInError;
-    if(error || gError){
-        signInError= <p className='text-red-500'><small>{error?.message || gError?.message }</small></p>
+    let loginError;
+    if (error || gError) {
+        loginError = <small className='text-danger'>{error?.message || gError?.message}</small>
     }
 
     const onSubmit = data => {
@@ -47,16 +48,7 @@ const Login = () => {
                     <h2>Login</h2>
                 </div>
                 <Container>
-                    <div className="ic-login-content text-center">
-                        <Row>
-                            <div className="col-sm-12">
-                                <div className="ic-login-top">
-                                    <img src={logo} className="img-fluid" alt="logo"/>
-                                    <p>Welcome back! To get started, enter your email address & password below.</p>
-                                </div>
-                            </div>
-                        </Row>
-
+                    <div className="ic-login-content">
                         <div className="ic-registration-box">
                             <Row className={'align-items-center'}>
                                 <Col lg={'6'}>
@@ -67,14 +59,12 @@ const Login = () => {
                                 <Col lg={'6'}>
                                     <div className="">
                                         <form onSubmit={handleSubmit(onSubmit)}>
-                                            <div className="form-control w-full max-w-xs">
-                                                <label className="label">
-                                                    <span className="label-text">Email</span>
-                                                </label>
+                                            <div className="form-group mb-4">
+                                                <label className="label">Email</label>
                                                 <input
                                                     type="email"
                                                     placeholder="Your Email"
-                                                    className="input input-bordered w-full max-w-xs"
+                                                    className="form-control"
                                                     {...register("email", {
                                                         required: {
                                                             value: true,
@@ -86,19 +76,17 @@ const Login = () => {
                                                         }
                                                     })}
                                                 />
-                                                <label className="label">
-                                                    {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                                                    {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                                                </label>
+                                                <small className="text-danger">
+                                                    {errors.email?.type === 'required' && errors.email.message}
+                                                    {errors.email?.type === 'pattern' && errors.email.message}
+                                                </small>
                                             </div>
-                                            <div className="form-control w-full max-w-xs">
-                                                <label className="label">
-                                                    <span className="label-text">Password</span>
-                                                </label>
+                                            <div className="form-group mb-4">
+                                                <label className="label">Password</label>
                                                 <input
                                                     type="password"
                                                     placeholder="Password"
-                                                    className="input input-bordered w-full max-w-xs"
+                                                    className="form-control"
                                                     {...register("password", {
                                                         required: {
                                                             value: true,
@@ -110,33 +98,30 @@ const Login = () => {
                                                         }
                                                     })}
                                                 />
-                                                <label className="label">
-                                                    {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
-                                                    {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>}
-                                                </label>
+                                                <small className="text-danger">
+                                                    {errors.password?.type === 'required' && errors.password.message}
+                                                    {errors.password?.type === 'minLength' && errors.password.message}
+                                                </small>
                                             </div>
-                                            {signInError}
-                                            <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
-                                        </form>
-                                        <p><small>New to Doctors Portal <Link className='text-primary' to="/signup">Create New Account</Link></small></p>
-                                        <div className="divider">OR</div>
-                                        <button onClick={() => signInWithGoogle()} className="btn btn-outline">Continue with Google</button>
-                                        <div className="d-flex justify-content-between m-display">
-                                            <div>
-                                                <div className="ic-round-checkbox ic-login-checkbox">
-                                                    <input type="checkbox" id="checkbox"/>
-                                                    <label htmlFor="checkbox"></label>
-                                                    <p>Remember Me</p>
+                                            {loginError}
+                                            <div className="d-flex justify-content-between m-display">
+                                                <div>
+                                                    <div className="ic-round-checkbox ic-login-checkbox">
+                                                        <input type="checkbox" id="checkbox"/>
+                                                        <label htmlFor="checkbox"></label>
+                                                        <p>Remember Me</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p className="ic-forget-text"><a href="forget-password.html"><i>Forgot Password?</i></a></p>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p className="ic-forget-text"><a href="forget-password.html"><i>Forgot Password?</i></a></p>
+                                            <div className="ic-login-bottom text-center">
+                                                <button className='btn-default' type="submit">Login</button>
+                                                <p>Don't Have An Account? <span><Link className='text-primary' to="/register">Register Now</Link></span></p>
                                             </div>
-                                        </div>
-                                        <div className="ic-login-bottom text-center">
-                                            <button type="btn">Login My Account</button>
-                                            <p>Don't Have An Account? <span><a href="registration.html"><i>Register Now</i></a></span></p>
-                                        </div>
+                                        </form>
+                                        <button onClick={() => signInWithGoogle()} className="btn-default">Continue with Google</button>
                                     </div>
                                 </Col>
                             </Row>

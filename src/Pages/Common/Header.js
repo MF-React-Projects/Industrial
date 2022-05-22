@@ -11,8 +11,16 @@ import {FaPinterestP} from "@react-icons/all-files/fa/FaPinterestP";
 import {FaPhoneAlt} from "@react-icons/all-files/fa/FaPhoneAlt";
 import {FaRegEnvelope} from "@react-icons/all-files/fa/FaRegEnvelope";
 import {FaMapMarkerAlt} from "@react-icons/all-files/fa/FaMapMarkerAlt";
+import {useAuthState} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import {signOut} from 'firebase/auth';
 
 const Header = () => {
+    const [user] = useAuthState(auth);
+
+    const handleSignOut = () => {
+        signOut(auth);
+    };
     return (
         <>
             <header className="header-area">
@@ -50,8 +58,16 @@ const Header = () => {
                                 <CustomLink to="/blogs">Blogs</CustomLink>
                             </Nav>
                             <div className="header-right">
-                                <Link to={'/login'} className='btn-default btnSm'>Login</Link>
-                                <Link to={'/register'} className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
+                                {
+                                    user ?
+                                        <button className='btn-default btnSm' onClick={handleSignOut}>Logout</button>
+                                        :
+                                        <>
+                                            <Link to={'/login'} className='btn-default btnSm'>Login</Link>
+                                            <Link to={'/register'}
+                                                  className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
+                                        </>
+                                }
                             </div>
                         </Navbar.Collapse>
                     </Container>
