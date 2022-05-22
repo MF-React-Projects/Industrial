@@ -3,6 +3,14 @@ import {Col, Container, Nav, Navbar, Row} from "react-bootstrap";
 import logo from '../../logo.png';
 import {Link} from "react-router-dom";
 import CustomLink from "./CustomLink";
+import {FaFacebookF} from "@react-icons/all-files/fa/FaFacebookF";
+import {FaTwitter} from "@react-icons/all-files/fa/FaTwitter";
+import {FaLinkedin} from "@react-icons/all-files/fa/FaLinkedin";
+import {FaInstagram} from "@react-icons/all-files/fa/FaInstagram";
+import {FaPinterestP} from "@react-icons/all-files/fa/FaPinterestP";
+import {FaPhoneAlt} from "@react-icons/all-files/fa/FaPhoneAlt";
+import {FaRegEnvelope} from "@react-icons/all-files/fa/FaRegEnvelope";
+import {FaMapMarkerAlt} from "@react-icons/all-files/fa/FaMapMarkerAlt";
 
 const Header = () => {
     return (
@@ -11,33 +19,21 @@ const Header = () => {
                 <div className="top-bar">
                     <Container>
                         <Row>
-                            <Col lg='6'>
-                                <div className="top-bar-left">
-                                    <div id="anpstext-7" className="widget widget_anpstext">
-                                        <ul className="contact-info">
-                                            <li className="contact-info-item"><i className="fa fa-map-marker"></i>300 Pennsylvania Ave NW</li>
-                                            <li className="contact-info-item"><i className="fa fa-clock-o"></i>Mon - Sat: 7:00 - 17:00</li>
-                                            <li className="contact-info-item"><i className="fa fa-phone"></i>+ 386 40 111 5555</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <Col lg='8'>
+                                <ul className="contact-info">
+                                    <li className="contact-info-item"><FaMapMarkerAlt/> 300 Pennsylvania Ave NW</li>
+                                    <li className="contact-info-item"><FaRegEnvelope/> info@yourdomain.com</li>
+                                    <li className="contact-info-item"><FaPhoneAlt/> + 386 40 111 5555</li>
+                                </ul>
                             </Col>
-                            <Col lg='6'>
-                                <div className="top-bar-right">
-                                    <div id="anpstext-8" className="widget widget_anpstext">
-                                        <ul className="contact-info">
-                                            <li className="contact-info-item"><i className="fa fa-envelope-o"></i> info@yourdomain.com</li>
-                                        </ul>
-                                    </div>
-                                    <div id="anpssocial-2" className="widget widget_anpssocial">
-                                        <ul className="social">
-                                            <li><a href="#" target="_self"><i className="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" target="_self"><i className="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" target="_self"><i className="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" target="_self"><i className="fa fa-wordpress"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <Col lg='4'>
+                                <ul className="social">
+                                    <li><Link to='#' target="_self"><FaFacebookF/></Link></li>
+                                    <li><Link to='#' target="_self"><FaTwitter/></Link></li>
+                                    <li><Link to='#' target="_self"><FaLinkedin/></Link></li>
+                                    <li><Link to='#' target="_self"><FaInstagram/></Link></li>
+                                    <li><Link to='#' target="_self"><FaPinterestP/></Link></li>
+                                </ul>
                             </Col>
                         </Row>
                     </Container>
@@ -49,12 +45,14 @@ const Header = () => {
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="m-auto">
+                            <Nav className="ms-auto">
                                 <CustomLink to="/">Home</CustomLink>
                                 <CustomLink to="/blogs">Blogs</CustomLink>
                             </Nav>
-                            <div className="pm-header-right">
-
+                            <div className="header-right">
+                                <Link to={'/login'} className='btn-default btnSm'>Login</Link>
+                                <Link to={'/register'}
+                                      className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
                             </div>
                         </Navbar.Collapse>
                     </Container>

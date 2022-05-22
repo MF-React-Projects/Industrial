@@ -1,22 +1,67 @@
-.header-area{
+.header-area {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px -4px;
 
-  .top-bar{
+  .top-bar {
+    background: $gray_color;
+    padding: 12px 0;
+    .contact-info {
+      list-style: none;
+      display: flex;
 
+      li {
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+
+        svg{
+          margin-right: 10px;
+          font-size: 14px;
+          path{
+            fill:$p-color;
+          }
+        }
+      }
+    }
+
+    ul.social {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+
+      li{
+        margin: 0 10px;
+
+        a{
+          color:$black_color;
+
+          &:hover{
+            color: $p-color;
+          }
+        }
+      }
+    }
+  }
+
+  .header-right{
+    margin-left: 30px;
   }
 }
-.nav-link{
-  color: #003DA7;
+
+.nav-link {
+  color: $black_color;
   font-weight: 500;
 }
-.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
-  color: #e80000;
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link {
+  color: $p-color;
 }
+
 @media only screen and (max-width: 575.98px) {
-  .navbar-brand img{
+  .navbar-brand img {
     width: 180px;
   }
 }
+
 .navbar-toggler:focus {
   text-decoration: none;
   outline: 0;
