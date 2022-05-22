@@ -17,11 +17,8 @@
 }
 
 .ic-forget-text {
-
   a {
     color: #2e3189;
-
-
     text-decoration: underline;
   }
 }
@@ -73,29 +70,14 @@
 .ic-login-bottom {
   margin-top: -5px;
 
-  button {
-    width: 100%;
-    padding: 8px 0;
-    background: #2E3189;
-    border: 1px solid #2E3189;
-    border-radius: 0;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      background: black;
-    }
-
-  }
-
   p {
     margin: 35px 0 0 0;
-    color: #131420;
+    color: $black_color;
   }
 
   span {
     a {
-      color: #2e3189;
+      color: $p_color;
       text-decoration: underline;
     }
 

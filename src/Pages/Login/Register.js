@@ -103,38 +103,22 @@ const Register = () => {
                                                 </small>
                                             </div>
                                             {loginError}
-                                            <div className="d-flex justify-content-between m-display">
-                                                <div>
-                                                    <div className="ic-round-checkbox ic-login-checkbox">
-                                                        <input type="checkbox" id="checkbox"/>
-                                                        <label htmlFor="checkbox"></label>
-                                                        <p>Remember Me</p>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <p className="ic-forget-text"><a href="forget-password.html"><i>Forgot Password?</i></a></p>
+                                            <div className="d-flex justify-content-between">
+                                                <div className="ic-round-checkbox">
+                                                    <input type="checkbox" id="checkbox"/>
+                                                    <label htmlFor="checkbox"></label>
+                                                    <p className="ic-registar-text">Accpect Privacy policy and terms & conditions </p>
                                                 </div>
                                             </div>
                                             <div className="ic-login-bottom text-center">
-                                                <button className='btn-default' type="submit">Login</button>
-                                                <p>Don't Have An Account? <span><Link className='text-primary' to="/register">Register Now</Link></span></p>
+                                                <button className='btn-default w-100' type="submit">Register</button>
+                                                <p>Already Have An Account? <Link to={'/login'}>Login Now</Link></p>
                                             </div>
                                         </form>
-                                        <button onClick={() => signInWithGoogle()} className="btn-default">Continue with Google</button>
-
-                                    </div>
-                                    <div>
-                                        <div className="d-flex justify-content-between">
-                                            <div className="ic-round-checkbox">
-                                                <input type="checkbox" id="checkbox"/>
-                                                <label htmlFor="checkbox"></label>
-                                                <p className="ic-registar-text">Accpect Privacy policy and terms & conditions </p>
-                                            </div>
+                                        <div className="btn-group">
+                                            <button onClick={() => signInWithGoogle()} className="btn-default">Continue with Google</button>
+                                            <button onClick={() => signInWithGoogle()} className="btn-default">Continue with Google</button>
                                         </div>
-                                    </div>
-                                    <div className="ic-login-bottom text-center">
-                                        <button type="btn">Register Now</button>
-                                        <p>Already Have An Account? <span><a href="login.html"><i>Login Now</i></a></span></p>
                                     </div>
                                 </Col>
                             </Row>

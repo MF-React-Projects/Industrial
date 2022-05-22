@@ -116,7 +116,7 @@ const Login = () => {
                                                 </div>
                                             </div>
                                             <div className="ic-login-bottom text-center">
-                                                <button className='btn-default' type="submit">Login</button>
+                                                <button className='btn-default w-100' type="submit">Login</button>
                                                 <p>Don't Have An Account? <span><Link className='text-primary' to="/register">Register Now</Link></span></p>
                                             </div>
                                         </form>
