@@ -16,7 +16,7 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const {register, formState: {errors}, handleSubmit} = useForm();
     const navigate = useNavigate();
@@ -29,9 +29,24 @@ const Register = () => {
         }
     }, [user, from, navigate])
 
-    let registerError;
-    if (error || updateError) {
-        registerError = <small className='text-danger'>{error?.message || updateError?.message}</small>
+    // Error handling
+    let registerError, errorMessage;
+    if(error || updateError){
+        switch (error?.code || updateError?.code) {
+            case 'auth/email-already-in-use':
+                errorMessage = 'Email already in use';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'Invalid email';
+                break;
+            case 'auth/weak-password':
+                errorMessage = 'Password is too weak';
+                break;
+            default:
+                errorMessage = error?.message || updateError?.message;
+                break;
+        }
+        registerError = <small className='text-danger'>{errorMessage}</small>
     }
 
     const onSubmit = async data => {

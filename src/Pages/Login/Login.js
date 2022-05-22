@@ -33,9 +33,27 @@ const Login = () => {
         }
     }, [user, from, navigate])
 
-    let loginError;
-    if (error) {
-        loginError = <small className='text-danger'>{error?.message}</small>
+    // Error handling
+    let loginError, errorMessage;
+    if(error) {
+        switch (error?.code) {
+            case 'auth/user-not-found':
+                errorMessage = 'User not found';
+                break;
+            case 'auth/wrong-password':
+                errorMessage = 'Wrong password';
+                break;
+            case 'auth/missing-email':
+                errorMessage = 'User not found with this email';
+                break;
+            case 'auth/invalid-email':
+                errorMessage = 'Invalid email';
+                break;
+            default:
+                errorMessage = error?.message;
+                break;
+        }
+        loginError = <small className='text-danger'>{errorMessage}</small>
     }
 
     const onSubmit = data => {
