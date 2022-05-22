@@ -3,8 +3,8 @@
   color: #fff;
   display: inline-block;
   padding: 12px 36px;
-  background-color: #e80000;
-  border:1px solid #e80000;
+  background-color: $p_color;
+  border:1px solid $p_color;
   border-radius: 5px;
   text-transform: capitalize;
   transition: all 0.3s ease-in-out;
@@ -12,17 +12,16 @@
 }
 .btn-default:hover {
   background-color: transparent;
-  border:1px solid #e80000;
-  color: #e80000;
+  color: $p_color;
 }
 
 .btn-default.btn-secondary {
-  background-color: #003DA7;
-  border: 1px solid #003DA7;
+  background-color: $p_color2;
+  border: 1px solid $p_color2;
 }
 .btn-default.btn-secondary:hover {
   background-color: transparent;
-  color: #003DA7;
+  color: $p_color2;
 }
 
 .btn-default:focus{
