@@ -6,17 +6,17 @@ const Product = ({product}) => {
     const {name, price, image} = product;
 
     return (
-        <Col xs={12} sm={6} md={6} lg={4}>
-            <div className="flick-product">
+        <Col xs={12} sm={6} md={6} lg={3}>
+            <div className="ic-product">
                 <div className="img-box">
                     <img src={image} alt="" className='img-fluid'/>
                 </div>
-                <div className="flick-product-content">
+                <div className="ic-product-content">
                     <h5>{name}</h5>
-                    <p>${price}</p>
-                    <Button variant="primary" className='w-100'>
+                    <p className={'price'}>${price}</p>
+                    <Button className='w-100 btn-default btn-sm'>
+                        <FaCartPlus className={'me-2'}/>
                         Add to cart
-                        <FaCartPlus/>
                     </Button>
                 </div>
             </div>

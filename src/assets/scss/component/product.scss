@@ -1,0 +1,41 @@
+
+/* Product */
+.ic-product{
+  -webkit-transition: all .25s;
+  transition: all .25s;
+  border: 1px solid #ebebeb;
+  margin-bottom: 20px;
+
+  .img-box {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+
+    img{
+      transition: all 1s ease-in-out;
+    }
+  }
+
+  .ic-product-content {
+    padding: 15px;
+    text-align: center;
+
+    h5 {
+      font-weight: 600;
+      color: #333334;
+    }
+    p.price {
+      font-weight: 600;
+      font-size: 22px;
+      color: $p_color;
+      -webkit-transition: all 0.3s ease 0s;
+      transition: all 0.3s ease 0s;
+    }
+  }
+
+  &:hover{
+    .img-box img{
+      transform: scale(1.2);
+    }
+  }
+}
