@@ -1,0 +1,154 @@
+[
+  {
+    "name": "Brush",
+    "image": "https://i.ibb.co/wQs4Mpg/brush-1.jpg",
+    "price": "10",
+    "minQuantity": "100",
+    "inStock": "10000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Chain Saw",
+    "image": "https://i.ibb.co/vjZmfZY/chainsaw-1.jpg",
+    "price": "25",
+    "minQuantity": "50",
+    "inStock": "15000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Colour Roller",
+    "image": "https://i.ibb.co/THYDx56/paintroller-1.jpg",
+    "price": "50",
+    "minQuantity": "100",
+    "inStock": "10000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Construction Helmet",
+    "image": "https://i.ibb.co/R7ktZ4Z/constructionhelmet-1.jpg",
+    "price": "100",
+    "minQuantity": "50",
+    "inStock": "50000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Cutters",
+    "image": "https://i.ibb.co/PFhnjV4/cutters-1.jpg",
+    "price": "40",
+    "minQuantity": "50",
+    "inStock": "50000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Drill Set",
+    "image": "https://i.ibb.co/Tw7GnCn/drillset-1.jpg",
+    "price": "35",
+    "minQuantity": "100",
+    "inStock": "20000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Electric Saw",
+    "image": "https://i.ibb.co/Gp41WMP/electricsaw-1.jpg",
+    "price": "40",
+    "minQuantity": "200",
+    "inStock": "80000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Grass Mower",
+    "image": "https://i.ibb.co/cQq43DN/landmower-1.jpg",
+    "price": "80",
+    "minQuantity": "50",
+    "inStock": "40000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Hammer",
+    "image": "https://i.ibb.co/RbFyhYK/hammer-1.jpg",
+    "price": "20",
+    "minQuantity": "100",
+    "inStock": "10000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Jack Hammer",
+    "image": "https://i.ibb.co/XxdDX8T/jackhammer-1.jpg",
+    "price": "30",
+    "minQuantity": "100",
+    "inStock": "20000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Measurement Tape",
+    "image": "https://i.ibb.co/KWWftsb/tape-1.jpg",
+    "price": "15",
+    "minQuantity": "200",
+    "inStock": "100000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Nail Gun",
+    "image": "https://i.ibb.co/RNdscpG/electricnailer-1.jpg",
+    "price": "150",
+    "minQuantity": "50",
+    "inStock": "80000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Screw Driver",
+    "image": "https://i.ibb.co/9vyTNrZ/screwdriver-1.jpg",
+    "price": "10",
+    "minQuantity": "100",
+    "inStock": "30000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Screw Set",
+    "image": "https://i.ibb.co/89nKgSk/screwset-1.jpg",
+    "price": "60",
+    "minQuantity": "100",
+    "inStock": "20000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Tool Belt",
+    "image": "https://i.ibb.co/KzWKYry/toolbelt-1.jpg",
+    "price": "50",
+    "minQuantity": "50",
+    "inStock": "10000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Tool Box",
+    "image": "https://i.ibb.co/mHYjNcL/toolbox-1.jpg",
+    "price": "50",
+    "minQuantity": "100",
+    "inStock": "80000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Trowers",
+    "image": "https://i.ibb.co/z5bc8kZ/trowels-1.jpg",
+    "price": "30",
+    "minQuantity": "50",
+    "inStock": "10000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Water Level",
+    "image": "https://i.ibb.co/k1FvPgt/waterlevel-1.jpg",
+    "price": "40",
+    "minQuantity": "100",
+    "inStock": "30000",
+    "shortDescription": "Brush"
+  },
+  {
+    "name": "Wrench Set",
+    "image": "https://i.ibb.co/TbD0Svt/wrenchset-1.jpg",
+    "price": "100",
+    "minQuantity": "50",
+    "inStock": "50000",
+    "shortDescription": "Brush"
+  }
+]
