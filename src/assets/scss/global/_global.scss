@@ -8,7 +8,15 @@
   padding-top: 80px;
   padding-bottom: 80px;
 }
-
+.p_color{
+  color:$p_color;
+}
+.p_color2{
+  color: $p_color2;
+}
+.s_color{
+  color: $s_color;
+}
 
 mark, ins {
   background: transparent !important;
