@@ -4,23 +4,24 @@ import {Container, Row} from "react-bootstrap";
 import {useQuery} from "react-query";
 import ReviewItem from "./ReviewItem";
 import Loading from "../Common/Loading";
+import SectionHeader from "../Common/SectionHeader";
 
 const Reviews = () => {
     const {data: reviews, isLoading, isError} = useQuery('reviews', () => {
-        return fetch('https://localhost:5000/reviews')
+        return fetch('http://localhost:5000/reviews?limit=3')
             .then(res => res.json())
     });
 
     if(isLoading) return <Loading/>
 
     return (
-        <section className="testimonial-section">
+        <section className="testimonial-section section-bg py-80">
             <Container>
-
+                <SectionHeader badge={'Best Reviews'} title={'Customer Reviews'}/>
                 <div className="review-items">
                     <Row>
                         {
-                            reviews.slice(0, 3).map(review => <ReviewItem key={review.id} review={review}/>)
+                            reviews.map(review => <ReviewItem key={review.id} review={review}/>)
                         }
                     </Row>
                 </div>
