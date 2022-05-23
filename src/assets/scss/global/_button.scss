@@ -44,3 +44,32 @@
 .btn-default.btnSm{
   padding: 7px 28px;
 }
+
+
+/* Button style two */
+.btn-default-2 {
+  color: #fff;
+  display: inline-block;
+  padding: 12px 36px;
+  background-color: $p_color;
+  border:1px solid $p_color;
+  border-radius: 5px;
+  text-transform: capitalize;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+.btn-default-2:hover {
+  background-color: $p_color2;
+  border:1px solid $p_color2;
+  color: #fff;
+}
+
+.btn-default-2.btn-secondary {
+  background-color: $p_color2;
+  border: 1px solid $p_color2;
+}
+.btn-default-2.btn-secondary:hover {
+  background-color: $p_color;
+  border:1px solid $p_color;
+  color: #fff;
+}
