@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSignInWithGithub, useSignInWithGoogle} from 'react-firebase-hooks/auth';
 import {useLocation, useNavigate} from 'react-router-dom';
 import auth from "../../firebase.init";
@@ -9,26 +9,27 @@ import Loading from "../Common/Loading";
 const SocialLogin = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
 
-    let socialError, errorMessage;
-    if (googleError || githubError) {
-        switch (googleError?.code || githubError?.code) {
-            case 'auth/account-exists-with-different-credential':
-                errorMessage = 'You have already signed up with a different provider';
-                break;
-            case 'auth/popup-blocked':
-                errorMessage = 'Please enable popups for this website';
-                break;
-            case 'auth/popup-closed-by-user':
-                errorMessage = 'The popup was closed by the user before finalizing the sign in';
-                break;
-            default:
-                errorMessage = googleError?.message || githubError?.message;
+    useEffect(() =>{
+        if (googleError || githubError) {
+            switch (googleError?.code || githubError?.code) {
+                case 'auth/account-exists-with-different-credential':
+                    setError('You have already signed up with a different provider');
+                    break;
+                case 'auth/popup-blocked':
+                    setError('Please enable popups for this website');
+                    break;
+                case 'auth/popup-closed-by-user':
+                    setError('The popup was closed by the user before finalizing the sign in');
+                    break;
+                default:
+                    setError(googleError?.message || githubError?.message);
+            }
         }
-        socialError = <small className='text-danger'>{errorMessage}</small>
-    }
+    }, [googleError, githubError])
 
     //redirect user to previous page
     let from = location.state?.from?.pathname || "/";
@@ -58,7 +59,7 @@ const SocialLogin = () => {
                     </button>
                 </li>
             </ul>
-            {socialError}
+            <small className='text-danger'>{error}</small>
         </div>
     );
 };

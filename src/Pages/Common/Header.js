@@ -28,8 +28,8 @@ const Header = () => {
                     <Container>
                         <Row>
                             <Col lg='8'>
-                                <ul className="contact-info">
-                                    <li className="contact-info-item"><FaMapMarkerAlt/> 300 Pennsylvania Ave NW</li>
+                                <ul className="contact-info ms-0">
+                                    <li className="contact-info-item ps-0"><FaMapMarkerAlt/> 300 Pennsylvania Ave NW</li>
                                     <li className="contact-info-item"><FaRegEnvelope/> info@yourdomain.com</li>
                                     <li className="contact-info-item"><FaPhoneAlt/> + 386 40 111 5555</li>
                                 </ul>

@@ -19,7 +19,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-    const {register, formState: {errors}, handleSubmit} = useForm();
+    const {register, getValues, formState: {errors}, handleSubmit} = useForm();
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -57,12 +57,10 @@ const Login = () => {
     }
 
     const onSubmit = data => {
-        signInWithEmailAndPassword(data.email, data.password)
+        signInWithEmailAndPassword(data.email, data.password);
     }
-
     const resetPassword = async event => {
-        console.log(register)
-        const email = '';
+        const email = getValues('email');
         if (email) {
             await sendPasswordResetEmail(email);
             mySwal.fire({
@@ -160,11 +158,8 @@ const Login = () => {
                                         }
 
                                         <div className="d-flex justify-content-between align-items-center mt-3">
-                                            <p>Don't Have An Account? <Link className='text-decoration-underline'
-                                                                            to="/register">Register
-                                                Now</Link></p>
-                                            <Button variant='link' className="p-0 mb-2" onClick={resetPassword}>Forgot
-                                                Password?</Button>
+                                            <p>Don't Have An Account? <Link className='text-decoration-underline' to="/register">Register Now</Link></p>
+                                            <Button type='button' variant='link' className="p-0 mb-2" onClick={resetPassword}>Forgot Password?</Button>
                                         </div>
                                     </form>
                                     <SocialLogin/>
