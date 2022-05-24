@@ -8,18 +8,29 @@ import {useForm} from "react-hook-form";
 const Purchase = () => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
+    const [btnDisabled, setBtnDisabled] = useState(true);
     useEffect(() => {
         fetch(`http://localhost:5000/product/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [id]);
-    const {image, name, shortDescription, price, inStock} = product;
+    const {image, name, shortDescription, price, minQuantity, inStock} = product;
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const {register, formState: {errors}, handleSubmit} = useForm();
 
     const onSubmit = data => {
-        console.log(data)
+        // console.log(data)
     }
+
+    const handleQty = (e) => {
+        const {value} = e.target;
+        if (parseInt(value) >= parseInt(minQuantity) && parseInt(value) <= parseInt(inStock)) {
+            setBtnDisabled(false);
+        } else {
+            setBtnDisabled(true);
+        }
+    }
+
     return (
         <>
             <Header/>
@@ -34,6 +45,7 @@ const Purchase = () => {
                                 <h3 className='p_color font-bold'>{name}</h3>
                                 <ul className='product-infos list-unstyled ps-0 ms-0 mb-3 d-flex align-items-center justify-content-between'>
                                     <li><b>Price:</b> ${price}</li>
+                                    <li><b>Min Quantity:</b> {minQuantity}</li>
                                     <li><b>Stock:</b> {inStock}</li>
                                 </ul>
                                 <p>{shortDescription}</p>
@@ -131,7 +143,8 @@ const Purchase = () => {
                                     </div>
                                     <div className="col-md-4">
                                         <label htmlFor="inputState" className="form-label">State</label>
-                                        <input type="text" className="form-control" id="inputState" {...register("state")}/>
+                                        <input type="text" className="form-control"
+                                               id="inputState" {...register("state")}/>
                                     </div>
                                     <div className="col-md-2">
                                         <label htmlFor="inputZip" className="form-label">Zip</label>
@@ -143,20 +156,34 @@ const Purchase = () => {
                                             type="number"
                                             className="form-control"
                                             id="qty"
+                                            min='1'
                                             placeholder='Enter product quantity'
                                             {...register("qty", {
                                                 required: {
                                                     value: true,
                                                     message: 'Quantity is Required'
-                                                }
+                                                },
+                                                min: {
+                                                    value: minQuantity,
+                                                    message: `You have to order at least ${minQuantity} products`
+                                                },
+                                                max: {
+                                                    value: inStock,
+                                                    message: `Only ${inStock} products are available in stock`
+                                                },
+                                                onChange: handleQty
                                             })}
                                         />
                                         <small className="text-danger">
                                             {errors.qty?.type === 'required' && errors.qty.message}
+                                            {errors.qty?.type === 'min' && errors.qty.message}
+                                            {errors.qty?.type === 'max' && errors.qty.message}
                                         </small>
                                     </div>
                                     <div className="col-12">
-                                        <button type="submit" className="btn-default btn-secondary">Place Order</button>
+                                        <button type="submit" className="btn-default btn-secondary"
+                                                disabled={btnDisabled}>Place Order
+                                        </button>
                                     </div>
                                 </form>
 

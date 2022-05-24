@@ -9,7 +9,6 @@ import Loading from "../Common/Loading";
 const Blogs = () => {
     const navigate = useNavigate();
     const {data: blogs, isLoading} = useQuery('blogs', () => fetch('http://localhost:5000/blogs?limit=3').then(res => res.json()));
-    console.log(blogs)
     if(isLoading) return <Loading/>
 
     return (
