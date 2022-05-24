@@ -1,5 +1,4 @@
 import React from 'react';
-import './Blog.css';
 import {Col} from "react-bootstrap";
 
 const Blog = ({blog}) => {

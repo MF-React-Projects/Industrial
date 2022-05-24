@@ -13,7 +13,7 @@ const Blogs = () => {
     if(isLoading) return <Loading/>
 
     return (
-        <section id="blog" className="home-blog-section">
+        <section className="home-blog-section py-80">
             <Container>
                 <SectionHeader badge={'News Feeds'} title={'Latest News'}/>
                 <Row className='mb-5'>
@@ -21,9 +21,6 @@ const Blogs = () => {
                         blogs.map(blog => <Blog key={blog._id} blog={blog}/>)
                     }
                 </Row>
-                <div className="text-center mt-4">
-                    <button onClick={() => navigate('/blogs')} className="btn-default">View All Blog</button>
-                </div>
             </Container>
         </section>
     );

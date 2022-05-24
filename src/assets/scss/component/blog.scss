@@ -24,7 +24,7 @@
   padding: 5px 10px;
   background: #fff;
   border-radius: 3px;
-  color: #ff324d;
+  color: $p_color;
   z-index: 1;
 }
 
@@ -35,7 +35,7 @@
   width: 0;
   height: 100%;
   transition: width .4s;
-  background: #ff324d;
+  background: $p_color;
   opacity: .7;
 }
 

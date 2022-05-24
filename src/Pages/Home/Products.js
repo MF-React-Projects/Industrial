@@ -18,7 +18,7 @@ const Products = () => {
     return (
         <section className="products-section py-80">
             <Container>
-                <SectionHeader badge={'Best Products'} title={'Check our products'}/>
+                <SectionHeader badge={'New Arival'} title={'Our Latest Production'}/>
                 <Row>
                     {
                         products.map(product => <Product key={product._id} product={product}/>)
