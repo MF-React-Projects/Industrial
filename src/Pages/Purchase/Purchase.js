@@ -1,35 +1,165 @@
-import React from 'react';
-import {Link, useParams} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {useParams} from "react-router-dom";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import {Col, Container, Row} from "react-bootstrap";
+import {useForm} from "react-hook-form";
 
 const Purchase = () => {
     const {id} = useParams();
+    const [product, setProduct] = useState({});
+    useEffect(() => {
+        fetch(`http://localhost:5000/product/${id}`)
+            .then(res => res.json())
+            .then(data => setProduct(data))
+    }, [id]);
+    const {image, name, shortDescription, price, inStock} = product;
+
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const onSubmit = data => {
+        console.log(data)
+    }
     return (
         <>
             <Header/>
-            <div className='product-details'>
+            <div className='product-details py-80'>
                 <Container>
                     <Row>
-                        <Col lg={3}>
-                            <div className="product-single-thumb">
+                        <Col lg={5}>
+                            <div className="product-single-thumb mb-3">
                                 <img src={image} alt="product-thumb" className='img-fluid'/>
                             </div>
-                        </Col>
-                        <Col lg={9}>
                             <div className="product-single-content">
-                                <h2>{name}</h2>
+                                <h3 className='p_color font-bold'>{name}</h3>
                                 <ul className='product-infos list-unstyled ps-0 ms-0 mb-3 d-flex align-items-center justify-content-between'>
                                     <li><b>Price:</b> ${price}</li>
-                                    <li><b>Quantity:</b> {quantity}</li>
-                                    <li><b>Supplier:</b> {supplier}</li>
+                                    <li><b>Stock:</b> {inStock}</li>
                                 </ul>
-                                <p>{description}</p>
-                                <div className="d-flex align-items-center mt-4">
-                                    <Button className='btn-default btn-secondary btnSm me-3' onClick={handleDeliver}>Delivered</Button>
-                                    <Link to='/manage-inventories' className='btn-default btnSm'>Manage Inventories</Link>
-                                </div>
+                                <p>{shortDescription}</p>
+                            </div>
+                        </Col>
+                        <Col lg={7}>
+                            <div className={'place-order'}>
+                                <h3 className='p_color font-bold'>Place Order</h3>
+                                <form className="row g-3" onSubmit={handleSubmit(onSubmit)}>
+                                    <div className="col-md-6">
+                                        <label htmlFor="name" className="form-label">Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="name"
+                                            placeholder='Enter your name'
+                                            {...register("name", {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Name is Required'
+                                                }
+                                            })}
+                                        />
+                                        <small className="text-danger">
+                                            {errors.name?.type === 'required' && errors.name.message}
+                                        </small>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label htmlFor="email" className="form-label">Email</label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            id="email"
+                                            placeholder='Enter your email'
+                                            {...register("email", {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Email is Required'
+                                                },
+                                                pattern: {
+                                                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                                    message: 'Provide a valid Email'
+                                                }
+                                            })}
+                                        />
+                                        <small className="text-danger">
+                                            {errors.email?.type === 'required' && errors.email.message}
+                                            {errors.email?.type === 'pattern' && errors.email.message}
+                                        </small>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <label htmlFor="phone" className="form-label">Phone</label>
+                                        <input
+                                            type="tel"
+                                            className="form-control"
+                                            id="phone"
+                                            placeholder='Enter your phone'
+                                            {...register("phone", {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Phone is Required'
+                                                }
+                                            })}
+                                        />
+                                        <small className="text-danger">
+                                            {errors.phone?.type === 'required' && errors.phone.message}
+                                        </small>
+                                    </div>
+                                    <div className="col-12">
+                                        <label htmlFor="inputAddress" className="form-label">Address</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="inputAddress"
+                                            placeholder="1234 Main St"
+                                            {...register("address", {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Address is Required'
+                                                }
+                                            })}
+                                        />
+                                        <small className="text-danger">
+                                            {errors.address?.type === 'required' && errors.address.message}
+                                        </small>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <label htmlFor="inputCity" className="form-label">City</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="inputCity"
+                                            {...register("city")}
+                                        />
+                                    </div>
+                                    <div className="col-md-4">
+                                        <label htmlFor="inputState" className="form-label">State</label>
+                                        <input type="text" className="form-control" id="inputState" {...register("state")}/>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <label htmlFor="inputZip" className="form-label">Zip</label>
+                                        <input type="text" className="form-control" id="inputZip" {...register("zip")}/>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <label htmlFor="qty" className="form-label">Quantity</label>
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            id="qty"
+                                            placeholder='Enter product quantity'
+                                            {...register("qty", {
+                                                required: {
+                                                    value: true,
+                                                    message: 'Quantity is Required'
+                                                }
+                                            })}
+                                        />
+                                        <small className="text-danger">
+                                            {errors.qty?.type === 'required' && errors.qty.message}
+                                        </small>
+                                    </div>
+                                    <div className="col-12">
+                                        <button type="submit" className="btn-default btn-secondary">Place Order</button>
+                                    </div>
+                                </form>
+
                             </div>
                         </Col>
                     </Row>
