@@ -4,22 +4,40 @@ import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import {Col, Container, Row} from "react-bootstrap";
 import {useForm} from "react-hook-form";
+import {useAuthState} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Purchase = () => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
     const [btnDisabled, setBtnDisabled] = useState(true);
+    const [user] = useAuthState(auth);
+    const {image, name, shortDescription, price, minQuantity, inStock} = product;
+
+    const {register, formState: {errors}, handleSubmit, reset} = useForm({
+        defaultValues: {
+            name: user?.displayName,
+            email: user?.email,
+            qty: minQuantity
+        }
+    });
+
     useEffect(() => {
         fetch(`http://localhost:5000/product/${id}`)
             .then(res => res.json())
-            .then(data => setProduct(data))
-    }, [id]);
-    const {image, name, shortDescription, price, minQuantity, inStock} = product;
-
-    const {register, formState: {errors}, handleSubmit} = useForm();
+            .then(data => {
+                setProduct(data);
+                const {minQuantity} = data;
+                reset({
+                    name: user?.displayName,
+                    email: user?.email,
+                    qty: minQuantity
+                })
+            })
+    }, [id, reset, user]);
 
     const onSubmit = data => {
-        // console.log(data)
+        //
     }
 
     const handleQty = (e) => {
@@ -68,6 +86,7 @@ const Purchase = () => {
                                                     message: 'Name is Required'
                                                 }
                                             })}
+                                            readOnly
                                         />
                                         <small className="text-danger">
                                             {errors.name?.type === 'required' && errors.name.message}
@@ -90,6 +109,7 @@ const Purchase = () => {
                                                     message: 'Provide a valid Email'
                                                 }
                                             })}
+                                            readOnly
                                         />
                                         <small className="text-danger">
                                             {errors.email?.type === 'required' && errors.email.message}
