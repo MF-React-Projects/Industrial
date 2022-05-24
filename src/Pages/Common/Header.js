@@ -17,7 +17,7 @@ import {signOut} from 'firebase/auth';
 
 const Header = () => {
     const [user] = useAuthState(auth);
-
+    console.log(user)
     const handleSignOut = () => {
         signOut(auth);
     };
@@ -57,10 +57,16 @@ const Header = () => {
                                 <CustomLink to="/">Home</CustomLink>
                                 <CustomLink to="/blogs">Blogs</CustomLink>
                             </Nav>
-                            <div className="header-right">
+                            <div className="header-right d-flex align-items-center justify-content-center">
                                 {
                                     user ?
-                                        <button className='btn-default btnSm' onClick={handleSignOut}>Logout</button>
+                                        <>
+                                            <div className='header-user-info d-flex align-items-center justify-content-center me-3'>
+                                                <img src={user?.photoURL} alt="user-profile-pic" className={'rounded-circle me-2'} width='50'/>
+                                                <h6 className={'mb-0'}>{user?.displayName}</h6>
+                                            </div>
+                                            <button className='btn-default btnSm' onClick={handleSignOut}>Logout</button>
+                                        </>
                                         :
                                         <>
                                             <Link to={'/login'} className='btn-default btnSm'>Login</Link>

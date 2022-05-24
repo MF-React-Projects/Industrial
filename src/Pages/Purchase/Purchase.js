@@ -6,13 +6,18 @@ import {Col, Container, Row} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import {useAuthState} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const Purchase = () => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
-    const [btnDisabled, setBtnDisabled] = useState(true);
+    const [btnDisabled, setBtnDisabled] = useState(false);
     const [user] = useAuthState(auth);
     const {image, name, shortDescription, price, minQuantity, inStock} = product;
+    //sweetalert
+    const mySwal = withReactContent(Swal);
 
     const {register, formState: {errors}, handleSubmit, reset} = useForm({
         defaultValues: {
@@ -37,7 +42,48 @@ const Purchase = () => {
     }, [id, reset, user]);
 
     const onSubmit = data => {
-        //
+        const orderData = {
+            productId: id,
+            ...data,
+        };
+        fetch('http://localhost:5000/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    //reduce quantity
+                    axios.put(`http://localhost:5000/product/${id}`, {
+                        inStock: inStock - data.qty
+                    })
+                        .then(res => {
+                            if (res.status === 200) {
+                                mySwal.fire({
+                                    title: 'Success',
+                                    text: 'Your order has been placed successfully',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                });
+                                setProduct({...product, inStock: inStock - data.qty});
+                                setBtnDisabled(false);
+                                reset();
+                            }
+                        })
+                        .catch(err => console.log(err))
+                } else {
+                    mySwal.fire({
+                        title: 'Error',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+                setBtnDisabled(false);
+            })
     }
 
     const handleQty = (e) => {
@@ -140,7 +186,7 @@ const Purchase = () => {
                                             type="text"
                                             className="form-control"
                                             id="inputAddress"
-                                            placeholder="1234 Main St"
+                                            placeholder="Enter your address"
                                             {...register("address", {
                                                 required: {
                                                     value: true,
