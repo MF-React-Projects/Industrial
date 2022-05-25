@@ -19,7 +19,7 @@ const CheckoutForm = ({order}) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({totalPrice})
+            body: JSON.stringify(totalPrice)
         })
             .then(res => res.json())
             .then(data => {
@@ -82,7 +82,6 @@ const CheckoutForm = ({order}) => {
                 .then(res => res.json())
                 .then(data => {
                     setProcessing(false);
-                    console.log(data);
                 })
         }
 

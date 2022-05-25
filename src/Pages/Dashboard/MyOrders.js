@@ -11,7 +11,6 @@ import {useNavigate} from "react-router-dom";
 const MyOrders = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
-    //sweetalert
     const mySwal = withReactContent(Swal);
     const {data: orders, isLoading, refetch} = useQuery('orders', async () => {
         const response = await fetch(`http://localhost:5000/orders/${user?.email}`);
@@ -48,36 +47,38 @@ const MyOrders = () => {
 
     return (
         <div>
-            <h2 className='text-center p_color'>My Orders</h2>
-            <Table striped responsive>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Quantity</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    orders.map((order, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{order.name}</td>
-                            <td>{order.email}</td>
-                            <td>{order.phone}</td>
-                            <td>{order.qty}</td>
-                            <td>
-                                <button className='btn btn-danger btn-sm me-2' onClick={() => handleCancel(order)}>Cancel</button>
-                                <button className='btn btn-primary btn-sm' onClick={() => navigate(`/dashboard/payment/${order._id}`)}>Pay</button>
-                            </td>
-                        </tr>
-                    ))
-                }
-                </tbody>
-            </Table>
+            <h2 className='text-center p_color mb-3'>My Orders</h2>
+            {
+                (orders.length !==0) ? <Table striped responsive>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        orders.map((order, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{order.name}</td>
+                                <td>{order.email}</td>
+                                <td>{order.phone}</td>
+                                <td>{order.qty}</td>
+                                <td>
+                                    <button className='btn btn-danger btn-sm me-2' onClick={() => handleCancel(order)}>Cancel</button>
+                                    <button className='btn btn-primary btn-sm' onClick={() => navigate(`/dashboard/payment/${order._id}`)}>Pay</button>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </Table> : <h5 className='text-center'>No Orders Found</h5>
+            }
         </div>
     );
 };
