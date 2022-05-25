@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
+import Loading from "../Common/Loading";
 
 const CheckoutForm = ({order}) => {
     const stripe = useStripe();
@@ -88,7 +89,7 @@ const CheckoutForm = ({order}) => {
     };
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={'mb-3'}>
                 <CardElement
                     options={{
                         style: {
@@ -105,19 +106,19 @@ const CheckoutForm = ({order}) => {
                         },
                     }}
                 />
-                <button className='btn btn-success btn-sm mt-4' type="submit"
+                <button className={`btn-default-2 btnSm mt-4 ${processing ? 'btn-loading' : ''}`} type="submit"
                         disabled={!stripe || !elements || !clientSecret}>
                     Pay
                 </button>
             </form>
             {
-                cardError && <p className='text-red-500'>{cardError}</p>
+                cardError && <small className='text-danger'>{cardError}</small>
             }
             {
-                success && <div className='text-green-500'>
-                    <p>{success} </p>
-                    <p>Your transaction Id: <span className="text-orange-500 font-bold">{transactionId}</span> </p>
-                </div>
+                success && <>
+                    <p className={'text-success'}>{success}</p>
+                    <p><strong>Your transaction Id:</strong> {transactionId}</p>
+                </>
             }
         </>
     );

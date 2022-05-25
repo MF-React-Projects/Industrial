@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useParams} from "react-router-dom";
 import {useQuery} from "react-query";
 import Loading from "../Common/Loading";
@@ -11,15 +11,14 @@ const stripePromise = loadStripe('pk_test_hNWYmz6pmum0Z3ywANVmTzbA00fSin7xRC');
 
 const Payment = () => {
     const {id} = useParams();
-    // const [order, setOrder] = useState({});
 
     const {data: order, isLoading} = useQuery(['order', id], () => fetch(`http://localhost:5000/order/${id}`)
-            .then(res => res.json()));
+        .then(res => res.json()));
 
-    const {productId, name, email, qty, phone, address, totalPrice} = order;
+    const {productId, name, email} = order;
 
-    const {data: product, isLoading: isLoadingProduct} = useQuery(['product', productId], () =>{
-        return fetch(`http://localhost:5000/product/${productId}`,{
+    const {data: product, isLoading: isLoadingProduct} = useQuery(['product', productId], () => {
+        return fetch(`http://localhost:5000/product/${productId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,26 +27,24 @@ const Payment = () => {
             .then(res => res.json())
     })
 
-    if(isLoading || isLoadingProduct) return <Loading/>;
+    if (isLoading || isLoadingProduct) return <Loading/>;
 
     return (
-        <div className={'payment py-5 px-5'}>
+        <div className={'payment py-3 px-3'}>
             <Row>
                 <Col lg={6}>
-                    <div className="order-review">
-                        <h3>Order Review</h3>
-                        <div className="order-review-item">
-                            <div className="order-review-item-img">
-                                <img src={product.image} alt=""/>
+                    <div className="order-review mb-4">
+                        <h3 className={'mb-3 p_color'}>Order Review</h3>
+                        <div className="order-review-item d-flex align-items-center">
+                            <div className="order-review-item-img me-3">
+                                <img src={product.image} alt="" width={150}/>
                             </div>
                             <div className="order-review-item-info">
                                 <h4>{product.name}</h4>
-                                <p>Quantity: {order.qty}</p>
-                                <p>Price: ${product.price}</p>
+                                <p className='mb-2'>Quantity: {order.qty}</p>
+                                <p className='mb-2'>Price: ${product.price}</p>
+                                <p className='mb-2'>Total: ${product.price * order.qty}</p>
                             </div>
-                        </div>
-                        <div className="order-review-total">
-                            <h4>Total: ${product.price * order.qty}</h4>
                         </div>
                     </div>
                 </Col>
