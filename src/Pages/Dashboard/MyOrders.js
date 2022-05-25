@@ -6,9 +6,11 @@ import auth from "../../firebase.init";
 import Loading from "../Common/Loading";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
 
 const MyOrders = () => {
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     //sweetalert
     const mySwal = withReactContent(Swal);
     const {data: orders, isLoading, refetch} = useQuery('orders', async () => {
@@ -68,8 +70,8 @@ const MyOrders = () => {
                             <td>{order.phone}</td>
                             <td>{order.qty}</td>
                             <td>
-                                <button className='btn btn-primary btn-sm' onClick={() => handleCancel(order)}>Cancel
-                                </button>
+                                <button className='btn btn-danger btn-sm me-2' onClick={() => handleCancel(order)}>Cancel</button>
+                                <button className='btn btn-primary btn-sm' onClick={() => navigate(`/dashboard/payment/${order._id}`)}>Pay</button>
                             </td>
                         </tr>
                     ))
