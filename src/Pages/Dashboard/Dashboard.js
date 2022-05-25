@@ -56,30 +56,7 @@ const Dashboard = () => {
                         </ul>
                     </div>
                 </div>
-                <div className={'dashboard-content w-100'}>
-                    <header className="py-3 mb-3 border-bottom w-100">
-                        <div className="container-fluid d-grid gap-3 align-items-center">
-                            <div className="d-flex align-items-center">
-                                <div className="flex-shrink-1 dropdown ">
-                                    <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle"
-                                       id="dropdownUser2"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-                                             className="rounded-circle"/>
-                                    </a>
-                                    <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                                        <li><a className="dropdown-item" href="#">New project...</a></li>
-                                        <li><a className="dropdown-item" href="#">Settings</a></li>
-                                        <li><a className="dropdown-item" href="#">Profile</a></li>
-                                        <li>
-                                            <hr className="dropdown-divider"/>
-                                        </li>
-                                        <li><a className="dropdown-item" href="#">Sign out</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+                <div className={'dashboard-content px-5 py-5 w-100'}>
                     <Outlet/>
                 </div>
             </div>
