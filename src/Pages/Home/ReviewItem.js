@@ -17,7 +17,7 @@ const ReviewItem = ({review, reviewPage}) => {
                     <div className="review-info">
                         <p className="name">{name}</p>
                         <Rating
-                            initialRating={stars}
+                            initialRating={parseInt(stars)}
                             emptySymbol={<FaStar/>}
                             fullSymbol={<FaStar style={{color: 'goldenrod'}}/>}
                             readonly

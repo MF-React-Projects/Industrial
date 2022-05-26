@@ -17,8 +17,8 @@ const AddReview = () => {
     const onSubmit = async data => {
         const reviewData = {
             ...data,
-            userName: user.displayName,
-            userAvatar: user.photoURL,
+            name: user.displayName,
+            avatar: user.photoURL,
         }
         const response = await axios.post('http://localhost:5000/review', reviewData);
         if (response.status === 200) {
@@ -29,6 +29,13 @@ const AddReview = () => {
                 confirmButtonText: 'OK'
             }).then(() => {
                 navigate('/')
+            })
+        } else {
+            mySwal.fire({
+                title: 'Error',
+                text: 'Something went wrong',
+                icon: 'error',
+                confirmButtonText: 'OK'
             })
         }
 
@@ -44,7 +51,7 @@ const AddReview = () => {
                         type="number"
                         placeholder="Enter your review"
                         className="form-control"
-                        {...register("review", {
+                        {...register("stars", {
                             required: {
                                 value: true,
                                 message: 'Review is Required'
@@ -60,9 +67,9 @@ const AddReview = () => {
                         })}
                     />
                     <small className="text-danger">
-                        {errors.review?.type === 'required' && errors.review.message}
-                        {errors.review?.type === 'min' && errors.review.message}
-                        {errors.review?.type === 'max' && errors.review.message}
+                        {errors.stars?.type === 'required' && errors.stars.message}
+                        {errors.stars?.type === 'min' && errors.stars.message}
+                        {errors.stars?.type === 'max' && errors.stars.message}
                     </small>
                 </div>
                 <div className="form-group mb-3">
@@ -70,7 +77,7 @@ const AddReview = () => {
                     <textarea
                         placeholder="Enter your feedback"
                         className="form-control"
-                        {...register("feedback", {
+                        {...register("comment", {
                             required: {
                                 value: true,
                                 message: 'Feedback is Required'
@@ -78,7 +85,7 @@ const AddReview = () => {
                         })}
                     />
                     <small className="text-danger">
-                        {errors.feedback?.type === 'required' && errors.feedback.message}
+                        {errors.comment?.type === 'required' && errors.comment.message}
                     </small>
                 </div>
                 <button className='btn-default w-100 mb-3' type="submit">Add a Review</button>
