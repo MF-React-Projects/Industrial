@@ -26,9 +26,7 @@ const Footer = () => {
                             <div className="footer-about">
                                 <img src={logo} alt="logo" className="footer-logo mb-4"/>
                                 <p>
-                                    I am a Photographer from new york, i love to capture the moments and share them with
-                                    you. I travel the world and capture the moments that i love. Wildlife, nature,
-                                    architecture, food, and people are my favorite subjects.
+                                    The number, the industry, and the morality of the priesthood, and the devotion of the people have been manifestly increased by the total separation of the church from the state.
                                 </p>
                             </div>
                         </Col>
@@ -59,10 +57,10 @@ const Footer = () => {
                                         <Link to="/">Home</Link>
                                     </li>
                                     <li>
-                                        <Link to="/about">About</Link>
+                                        <Link to="/blogs">Blogs</Link>
                                     </li>
                                     <li>
-                                        <Link to="/checkout">Checkout</Link>
+                                        <Link to="/my-portfolio">My Portfolio</Link>
                                     </li>
                                     {
                                         user ?
