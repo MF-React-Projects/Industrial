@@ -8,7 +8,7 @@ import SectionHeader from "../Common/SectionHeader";
 
 const Reviews = () => {
     const {data: reviews, isLoading, isError} = useQuery('reviews', () => {
-        return fetch('http://localhost:5000/reviews?limit=3')
+        return fetch('https://immense-savannah-85373.herokuapp.com/reviews?limit=3')
             .then(res => res.json())
     });
 

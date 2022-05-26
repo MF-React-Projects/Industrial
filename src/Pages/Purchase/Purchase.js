@@ -29,7 +29,7 @@ const Purchase = () => {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`,{
+        fetch(`https://immense-savannah-85373.herokuapp.com/product/${id}`,{
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -57,7 +57,7 @@ const Purchase = () => {
             totalPrice: price * data.qty,
             status: 'unpaid'
         };
-        fetch('http://localhost:5000/order', {
+        fetch('https://immense-savannah-85373.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ const Purchase = () => {
             .then(result => {
                 if (result.success) {
                     //reduce quantity
-                    axios.put(`http://localhost:5000/product/${id}`, {
+                    axios.put(`https://immense-savannah-85373.herokuapp.com/product/${id}`, {
                         inStock: inStock - data.qty
                     },{
                         headers: {

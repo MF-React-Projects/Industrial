@@ -20,7 +20,7 @@ const AddReview = () => {
             name: user.displayName,
             avatar: user.photoURL,
         }
-        const response = await axios.post('http://localhost:5000/review', reviewData);
+        const response = await axios.post('https://immense-savannah-85373.herokuapp.com/review', reviewData);
         if (response.status === 200) {
             mySwal.fire({
                 title: 'Success',

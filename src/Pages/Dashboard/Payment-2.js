@@ -15,20 +15,20 @@ const Payment = () => {
 
     useEffect(() => {
         const fetchOrder = async () => {
-            const response = await fetch(`http://localhost:5000/order/${id}`);
+            const response = await fetch(`https://immense-savannah-85373.herokuapp.com/order/${id}`);
             const data = await response.json();
             setOrder(data);
         };
         fetchOrder();
     }, [id]);
 
-    // const {data: order, isLoading} = useQuery(['order', id], () => fetch(`http://localhost:5000/order/${id}`)
+    // const {data: order, isLoading} = useQuery(['order', id], () => fetch(`https://immense-savannah-85373.herokuapp.com/order/${id}`)
     //     .then(res => res.json()));
 
     const {productId, name, email} = order;
 
     // const {data: product, isLoading: isLoadingProduct} = useQuery(['product', productId], () => {
-    //     return fetch(`http://localhost:5000/product/${productId}`, {
+    //     return fetch(`https://immense-savannah-85373.herokuapp.com/product/${productId}`, {
     //         method: 'GET',
     //         headers: {
     //             'Content-Type': 'application/json',

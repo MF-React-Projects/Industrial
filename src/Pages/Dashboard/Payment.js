@@ -13,7 +13,7 @@ const Payment = () => {
     const {id} = useParams();
 
     const {data: order, isLoading} = useQuery(['order', id], () =>{
-        return fetch(`http://localhost:5000/order/${id}`,{
+        return fetch(`https://immense-savannah-85373.herokuapp.com/order/${id}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

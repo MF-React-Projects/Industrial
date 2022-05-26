@@ -7,7 +7,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const ManageUsers = () => {
     const mySwal = withReactContent(Swal);
-    const {data: users, isLoading, refetch} = useQuery('users', () => fetch('http://localhost:5000/users', {
+    const {data: users, isLoading, refetch} = useQuery('users', () => fetch('https://immense-savannah-85373.herokuapp.com/users', {
         method: 'GET',
         headers: {
             authorization: 'Bearer ' + localStorage.getItem('accessToken')
@@ -17,7 +17,7 @@ const ManageUsers = () => {
 
     //make admin
     const makeAdmin = user => {
-        fetch(`http://localhost:5000/user/admin/${user.email}`, {
+        fetch(`https://immense-savannah-85373.herokuapp.com/user/admin/${user.email}`, {
             method: 'PUT',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -46,7 +46,7 @@ const ManageUsers = () => {
     };
 
     const removeAdmin = async user => {
-        await fetch(`http://localhost:5000/user/remove-admin/${user.email}`, {
+        await fetch(`https://immense-savannah-85373.herokuapp.com/user/remove-admin/${user.email}`, {
             method: 'PUT',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -85,7 +85,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Confirm'
         }).then((result) => {
             if (result.value) {
-                fetch(`http://localhost:5000/user/${user.email}`, {
+                fetch(`https://immense-savannah-85373.herokuapp.com/user/${user.email}`, {
                     method: 'DELETE',
                     headers: {
                         'authorization': `Bearer ${localStorage.getItem('accessToken')}`

@@ -13,7 +13,7 @@ const MyOrders = () => {
     const navigate = useNavigate();
     const mySwal = withReactContent(Swal);
     const {data: orders, isLoading, refetch} = useQuery('orders', async () => {
-        const response = await fetch(`http://localhost:5000/orders/${user?.email}`, {
+        const response = await fetch(`https://immense-savannah-85373.herokuapp.com/orders/${user?.email}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const MyOrders = () => {
         }).then((result) => {
             if (result.value) {
                 //cancel order
-                fetch(`http://localhost:5000/order/${orderId}`, {
+                fetch(`https://immense-savannah-85373.herokuapp.com/order/${orderId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'

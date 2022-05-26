@@ -11,7 +11,7 @@ const ManageProducts = () => {
     const mySwal = withReactContent(Swal);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/products")
+        axios.get("https://immense-savannah-85373.herokuapp.com/products")
             .then(res => {
                 setProducts(res.data);
             })
@@ -30,7 +30,7 @@ const ManageProducts = () => {
             confirmButtonText: 'Confirm'
         }).then((result) => {
             if (result.value) {
-                axios.delete(`http://localhost:5000/product/${id}`, {
+                axios.delete(`https://immense-savannah-85373.herokuapp.com/product/${id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'authorization': `Bearer ${localStorage.getItem('accessToken')}`

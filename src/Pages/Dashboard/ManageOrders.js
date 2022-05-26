@@ -7,7 +7,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const ManageUsers = () => {
     const mySwal = withReactContent(Swal);
-    const {data: orders, isLoading, refetch} = useQuery('orders', () => fetch('http://localhost:5000/orders', {
+    const {data: orders, isLoading, refetch} = useQuery('orders', () => fetch('https://immense-savannah-85373.herokuapp.com/orders', {
         method: 'GET',
         headers: {
             authorization: 'Bearer ' + localStorage.getItem('accessToken')
@@ -27,7 +27,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Confirm'
         }).then((result) => {
             if (result.value) {
-                fetch(`http://localhost:5000/order/${order._id}`, {
+                fetch(`https://immense-savannah-85373.herokuapp.com/order/${order._id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ const ManageUsers = () => {
     }
 
     const shipOrder = order => {
-        fetch(`http://localhost:5000/order/${order._id}`, {
+        fetch(`https://immense-savannah-85373.herokuapp.com/order/${order._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

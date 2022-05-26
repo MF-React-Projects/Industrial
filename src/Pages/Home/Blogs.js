@@ -8,7 +8,7 @@ import Loading from "../Common/Loading";
 
 const Blogs = () => {
     const navigate = useNavigate();
-    const {data: blogs, isLoading} = useQuery('blogs', () => fetch('http://localhost:5000/blogs?limit=3').then(res => res.json()));
+    const {data: blogs, isLoading} = useQuery('blogs', () => fetch('https://immense-savannah-85373.herokuapp.com/blogs?limit=3').then(res => res.json()));
     if(isLoading) return <Loading/>
 
     return (
