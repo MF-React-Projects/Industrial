@@ -88,7 +88,7 @@ const AddReview = () => {
                         {errors.comment?.type === 'required' && errors.comment.message}
                     </small>
                 </div>
-                <button className='btn-default w-100 mb-3' type="submit">Add a Review</button>
+                <button className='btn-default mb-3' type="submit">Add a Review</button>
             </form>
         </div>
     );
