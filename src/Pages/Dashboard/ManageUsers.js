@@ -119,18 +119,18 @@ const ManageUsers = () => {
     return (
         <div>
             <h2 className='text-center p_color mb-3'>Manage Users</h2>
-            <Table striped responsive>
-                <thead>
+            <Table striped bordered hover responsive>
+                <thead align={'center'} valign={'center'}>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Role</th>
-                    <th></th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody align={'center'} valign={'middle'}>
                 {
                     users.map((user, index) => (
                         <tr key={index}>

@@ -49,18 +49,18 @@ const MyOrders = () => {
         <div>
             <h2 className='text-center p_color mb-3'>My Orders</h2>
             {
-                (orders.length !==0) ? <Table striped responsive>
-                    <thead>
+                (orders.length !==0) ? <Table striped bordered hover responsive>
+                    <thead align={'center'} valign={'center'}>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Quantity</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody align={'center'} valign={'middle'}>
                     {
                         orders.map((order, index) => (
                             <tr key={index}>
