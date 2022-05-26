@@ -7,14 +7,39 @@ import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import axios from "axios";
 import {Col, Row} from "react-bootstrap";
+import {useQuery} from "react-query";
+import Loading from "../Common/Loading";
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
-    console.log(user)
-    const {register, formState: {errors}, handleSubmit} = useForm({
-        defaultValues:{
+    const {data: userData, isLoading} = useQuery(["user", user.email], () => {
+        return axios.get(`http://localhost:5000/user/${user.email}`, {
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        }).then(res => {
+            console.log(res.data)
+            reset({
+                name: user.displayName,
+                email: user.email,
+                phone: res.data?.phone,
+                address: res.data?.address,
+                city: res.data?.city,
+                state: res.data?.state,
+                zip: res.data?.zip,
+            })
+        });
+    });
+    const {register, formState: {errors}, handleSubmit, reset} = useForm({
+        defaultValues: {
             name: user.displayName,
             email: user.email,
+            phone: userData?.phone,
+            address: userData?.address,
+            city: userData?.city,
+            state: userData?.state,
+            zip: userData?.zip,
         }
     });
     const mySwal = withReactContent(Swal);
@@ -25,7 +50,13 @@ const MyProfile = () => {
         }
         //insert data to database
         try {
-            const response = await axios.put(`http://localhost:5000/users/${user.uid}`, userData);
+            const response = await axios.put(`http://localhost:5000/user/${user.email}`, userData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+            console.log(response.data);
             mySwal.fire({
                 title: 'Success',
                 text: 'Your profile has been updated',
@@ -33,7 +64,6 @@ const MyProfile = () => {
                 confirmButtonText: 'OK'
             })
         } catch (e) {
-            console.log(e);
             mySwal.fire({
                 title: 'Error',
                 text: 'Something went wrong',
@@ -63,6 +93,9 @@ const MyProfile = () => {
             });
         }*/
     };
+
+    if (isLoading) return <Loading/>
+
     return (
         <div>
             <h2 className='text-center p_color mb-3'>My Profile</h2>
