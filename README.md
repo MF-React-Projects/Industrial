@@ -26,7 +26,7 @@ It is a single page application made with ReactJS, React Bootstrap,Route, Fireba
     * [React Counterup](https://www.npmjs.com/package/react-countup)
     * [React Stripe](https://stripe.com/docs/stripe-js/react)
 
-## [Live Demo](https://zoho-26c66.firebaseapp.com/)
+## [Live Demo](https://industrial-4c896.firebaseapp.com/)
 ## Admin Credential </br>
 **Email:** admin@demo.com <br>
 **Password:** 123456
