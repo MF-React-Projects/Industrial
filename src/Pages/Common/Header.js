@@ -57,6 +57,7 @@ const Header = () => {
                             <Nav className="m-auto">
                                 <CustomLink to="/">Home</CustomLink>
                                 <CustomLink to="/blogs">Blogs</CustomLink>
+                                <CustomLink to="/my-portfolio">My Portfolio</CustomLink>
                             </Nav>
                             {
                                 user ?

@@ -12,7 +12,7 @@ const Blogs = () => {
     if(isLoading) return <Loading/>
 
     return (
-        <section className="home-blog-section py-80">
+        <section className="home-blog-section section-bg py-80">
             <Container>
                 <SectionHeader badge={'News Feeds'} title={'Latest News'}/>
                 <Row className='mb-5'>
