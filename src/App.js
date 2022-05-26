@@ -11,6 +11,10 @@ import MyOrders from "./Pages/Dashboard/MyOrders";
 import AddReview from "./Pages/Dashboard/AddReview";
 import MyProfile from "./Pages/Dashboard/MyProfile";
 import Payment from "./Pages/Dashboard/Payment";
+import ManageUsers from "./Pages/Dashboard/ManageUsers";
+import AddProduct from "./Pages/Dashboard/AddProduct";
+import ManageProducts from "./Pages/Dashboard/ManageProducts";
+import RequireAdmin from "./Pages/Login/RequireAdmin";
 
 function App() {
     return (
@@ -30,6 +34,9 @@ function App() {
                     <Route path={'payment/:id'} element={<Payment/>}/>
                     <Route path={'add-review'} element={<AddReview/>}/>
                     <Route path={'my-profile'} element={<MyProfile/>}/>
+                    <Route path={'manage-users'} element={<RequireAdmin><ManageUsers/></RequireAdmin>}/>
+                    <Route path={'add-product'} element={<RequireAdmin><AddProduct/></RequireAdmin>}/>
+                    <Route path={'manage-products'} element={<RequireAdmin><ManageProducts/></RequireAdmin>}/>
                 </Route>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>

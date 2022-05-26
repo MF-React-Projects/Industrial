@@ -19,7 +19,6 @@ const MyProfile = () => {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         }).then(res => {
-            console.log(res.data)
             reset({
                 name: user.displayName,
                 email: user.email,
@@ -64,7 +63,6 @@ const MyProfile = () => {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 }
             });
-            console.log(response.data);
             mySwal.fire({
                 title: 'Success',
                 text: 'Your profile has been updated',

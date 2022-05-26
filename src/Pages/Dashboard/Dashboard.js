@@ -5,8 +5,13 @@ import {Link, Outlet} from "react-router-dom";
 import {AiFillDashboard} from "@react-icons/all-files/ai/AiFillDashboard";
 import CustomLink from "../Common/CustomLink";
 import {Container, Navbar, Nav, NavDropdown} from "react-bootstrap";
+import {useAuthState} from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import useAdmin from "../../hooks/useAdmin";
 
 const Dashboard = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user)
     return (
         <>
             <div className="dashboard-main d-flex">
@@ -36,6 +41,25 @@ const Dashboard = () => {
                                 My Profile
                             </CustomLink>
                         </li>
+
+                        {admin && <>
+                            <li>
+                                <CustomLink to='/dashboard/manage-users'>
+                                    Manage Users
+                                </CustomLink>
+                            </li>
+                            <li>
+                                <CustomLink to='/dashboard/add-product'>
+                                    Add Product
+                                </CustomLink>
+                            </li>
+                            <li>
+                                <CustomLink to='/dashboard/manage-products'>
+                                    Manage Products
+                                </CustomLink>
+                            </li>
+                        </>
+                        }
                     </ul>
                     <hr/>
                     <div className="dropdown">
