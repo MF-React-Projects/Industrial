@@ -8,6 +8,7 @@ import {useCreateUserWithEmailAndPassword, useUpdateProfile} from "react-firebas
 import auth from "../../firebase.init";
 import {useForm} from "react-hook-form";
 import SocialLogin from "./SocialLogin";
+import useToken from "../../hooks/useToken";
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -22,12 +23,13 @@ const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
+    const [token] = useToken(user);
 
     useEffect(() => {
-        if (user) {
-            navigate(from, {replace: true});
+        if(token){
+            navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token, from, navigate])
 
     // Error handling
     let registerError, errorMessage;

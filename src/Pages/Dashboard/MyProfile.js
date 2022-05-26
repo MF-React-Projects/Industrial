@@ -20,9 +20,49 @@ const MyProfile = () => {
     const mySwal = withReactContent(Swal);
 
     const onSubmit = async data => {
-
-
-    }
+        const userData = {
+            ...data
+        }
+        //insert data to database
+        try {
+            const response = await axios.put(`http://localhost:5000/users/${user.uid}`, userData);
+            mySwal.fire({
+                title: 'Success',
+                text: 'Your profile has been updated',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+        } catch (e) {
+            console.log(e);
+            mySwal.fire({
+                title: 'Error',
+                text: 'Something went wrong',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+        }
+        /*const {name, email} = data;
+        const user = auth.currentUser;
+        const credential = auth.EmailAuthProvider.credential(email, user.email);
+        try {
+            await user.reauthenticateWithCredential(credential);
+            await user.updateProfile({displayName: name});
+            await user.updateEmail(email);
+            mySwal.fire({
+                title: 'Success',
+                text: 'Your profile has been updated',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        } catch (e) {
+            mySwal.fire({
+                title: 'Error',
+                text: e.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }*/
+    };
     return (
         <div>
             <h2 className='text-center p_color mb-3'>My Profile</h2>

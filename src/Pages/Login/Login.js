@@ -10,6 +10,7 @@ import auth from "../../firebase.init";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import SocialLogin from "./SocialLogin";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
     const [
@@ -23,15 +24,16 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
+    const [token] = useToken(user);
 
     //sweetalert
     const mySwal = withReactContent(Swal);
 
     useEffect(() => {
-        if (user) {
-            navigate(from, {replace: true});
+        if(token){
+            navigate(from, { replace: true });
         }
-    }, [user, from, navigate])
+    }, [token, from, navigate])
 
     // Error handling
     let loginError, errorMessage;

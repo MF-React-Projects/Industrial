@@ -5,6 +5,7 @@ import auth from "../../firebase.init";
 import {FaGoogle} from "@react-icons/all-files/fa/FaGoogle";
 import {FaGithub} from "@react-icons/all-files/fa/FaGithub";
 import Loading from "../Common/Loading";
+import useToken from "../../hooks/useToken";
 
 const SocialLogin = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
@@ -12,6 +13,8 @@ const SocialLogin = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    const [token] = useToken(googleUser || githubUser);
 
     useEffect(() =>{
         if (googleError || githubError) {
@@ -31,12 +34,11 @@ const SocialLogin = () => {
         }
     }, [googleError, githubError])
 
-    //redirect user to previous page
-    let from = location.state?.from?.pathname || "/";
-
-    if (googleUser || githubUser) {
-        navigate(from, {replace: true});
-    }
+    useEffect(() => {
+        if(token){
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate])
 
     if (googleLoading || githubLoading) {
         return <Loading/>
