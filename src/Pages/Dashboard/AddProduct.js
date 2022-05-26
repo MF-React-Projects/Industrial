@@ -33,7 +33,12 @@ const AddProduct = () => {
                         inStock: data.productQty,
                         shortDescription: data.productShortDescription,
                     }
-                    axios.post('http://localhost:5000/products', product)
+                    axios.post('http://localhost:5000/products', product, {
+                        headers:{
+                            'Content-Type': 'application/json',
+                            'authorization': 'Bearer ' + localStorage.getItem('accessToken')
+                        }
+                    })
                         .then(res => {
                             mySwal.fire({
                                 title: 'Product Added',

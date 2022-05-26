@@ -26,7 +26,12 @@ const EditProduct = () => {
 
     useEffect(() => {
         const getProduct = async () => {
-            await axios.get(`http://localhost:5000/product/${id}`)
+            await axios.get(`http://localhost:5000/product/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
                 .then(res => {
                     setProduct(res.data);
                     const {name, price, image, inStock, minQuantity, shortDescription} = res.data;
@@ -54,7 +59,12 @@ const EditProduct = () => {
             shortDescription: data.productShortDescription,
         }
         if (data.productName && data.productPrice && data.productThumb && data.productMinQuantity && data.productQty && data.productShortDescription) {
-            axios.put(`http://localhost:5000/product/edit/${id}`, product)
+            axios.put(`http://localhost:5000/product/edit/${id}`, product, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
                 .then(res => {
                     mySwal.fire({
                         title: 'Success',

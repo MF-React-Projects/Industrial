@@ -3,12 +3,12 @@ import {Col} from "react-bootstrap";
 import Rating from "react-rating";
 import {FaStar} from "@react-icons/all-files/fa/FaStar";
 
-const ReviewItem = ({review, reviewPage}) => {
+const ReviewItem = ({review}) => {
     const {name, comment, stars, avatar} = review;
-    const updatedComment = !reviewPage ? comment.slice(0, 200) + '...' : comment;
+    const updatedComment = comment.slice(0, 200) + '...';
 
     return (
-        <Col lg={4} md={4} className={reviewPage ? 'mb-4' : 'mb-md-0 mb-4'}>
+        <Col lg={4} className={'mb-4'}>
             <div className="review-item h-100">
                 <div className="review-header">
                     <div className="review-avatar">

@@ -71,3 +71,21 @@ mark, ins {
     transform: rotate(360deg);
   }
 }
+
+.mobile-sidebar{
+  display: none !important;
+
+  li.nav-item svg {
+    width: 25px !important;
+    height: 22px;
+  }
+}
+
+@media #{$max991} {
+  .mobile-sidebar{
+    display: flex !important;
+  }
+  .desktop-sidebar{
+    display: none !important;
+  }
+}

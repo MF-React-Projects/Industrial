@@ -25,9 +25,6 @@ const Reviews = () => {
                         }
                     </Row>
                 </div>
-                <div className="view-all-reviews text-center mt-5">
-                    <Link to="/reviews" className={'btn-default'}>View All Reviews</Link>
-                </div>
             </Container>
         </section>
     );

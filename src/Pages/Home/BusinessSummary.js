@@ -8,8 +8,8 @@ const BusinessSummary = () => {
         <section className="business-summary py-80">
             <Container>
                 <Row>
-                    <Col lg={3}>
-                        <div className="cms-counter layout1 style2">
+                    <Col lg={3} md={6}>
+                        <div className="cms-counter layout1 style2 mb-4 mb-lg-0">
                             <div className="cms-counter-inner">
                                 <div className="top-counter">
                                     <h3 className="cms-counter-number-wrapper">
@@ -25,8 +25,8 @@ const BusinessSummary = () => {
                                 <h4 className="cms-counter-title">Years Experience</h4></div>
                         </div>
                     </Col>
-                    <Col lg={3}>
-                        <div className="cms-counter layout1 style2">
+                    <Col lg={3} md={6}>
+                        <div className="cms-counter layout1 style2 mb-4 mb-lg-0">
                             <div className="cms-counter-inner">
                                 <div className="top-counter">
                                     <h3 className="cms-counter-number-wrapper">
@@ -43,8 +43,8 @@ const BusinessSummary = () => {
                                 <h4 className="cms-counter-title">happy customer</h4></div>
                         </div>
                     </Col>
-                    <Col lg={3}>
-                        <div className="cms-counter layout1 style2">
+                    <Col lg={3} md={6}>
+                        <div className="cms-counter layout1 style2 mb-4 mb-lg-0">
                             <div className="cms-counter-inner">
                                 <div className="top-counter">
                                     <h3 className="cms-counter-number-wrapper">
@@ -60,8 +60,8 @@ const BusinessSummary = () => {
                                 <h4 className="cms-counter-title">distributor</h4></div>
                         </div>
                     </Col>
-                    <Col lg={3}>
-                        <div className="cms-counter layout1 style2">
+                    <Col lg={3} md={6}>
+                        <div className="cms-counter layout1 style2 mb-4 mb-lg-0">
                             <div className="cms-counter-inner">
                                 <div className="top-counter">
                                     <h3 className="cms-counter-number-wrapper">

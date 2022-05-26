@@ -16,6 +16,7 @@ const Footer = () => {
     const [user] = useAuthState(auth);
     const handleSignOut = () => {
         signOut(auth);
+        localStorage.removeItem('accessToken');
     };
     return (
         <footer className='footer'>
@@ -32,7 +33,7 @@ const Footer = () => {
                         </Col>
                         <Col md={6} lg={{span: 3, offset: 2}}>
                             <div className="footer-contact">
-                                <h3 className='widget-title'>Contact Me</h3>
+                                <h3 className='widget-title'>Contact Us</h3>
                                 <p>
                                     <FaMapMarkerAlt className="me-2"/>
                                     <span>Brooklyn, New York, USA</span>

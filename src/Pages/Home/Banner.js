@@ -11,8 +11,8 @@ const Banner = () => {
                     <Col lg='8'>
                         <div className="banner-content">
                             <h1 className=""><span>Best Manufecturer</span> in the world</h1>
-                            <h4 className="">Supplying the world with high quality chemical products.</h4>
-                            <Link to='/manage-inventories' className='btn-default-2'>Buy Now</Link>
+                            <h4 className="">Supplying the world with high quality products</h4>
+                            <a href='#products' className='btn-default-2'>Buy Now</a>
                         </div>
                     </Col>
                 </Row>

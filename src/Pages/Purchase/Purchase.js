@@ -29,7 +29,12 @@ const Purchase = () => {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`http://localhost:5000/product/${id}`,{
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
@@ -65,6 +70,11 @@ const Purchase = () => {
                     //reduce quantity
                     axios.put(`http://localhost:5000/product/${id}`, {
                         inStock: inStock - data.qty
+                    },{
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        }
                     })
                         .then(res => {
                             if (res.status === 200) {

@@ -17,8 +17,8 @@ const MyPortfolio = () => {
                     <SectionHeader badge={'Portfolio'} title={'My Portfolio'}/>
                     <Row className='align-items-center'>
                         <Col lg={5}>
-                            <div className="about-thumb">
-                                <img src={myPhoto} className='img-fluid' alt="my-photo"/>
+                            <div className="about-thumb mb-4">
+                                <img src={myPhoto} className='img-fluid w-100' alt="my-photo"/>
                             </div>
                         </Col>
                         <Col lg={7}>
@@ -89,9 +89,9 @@ const MyPortfolio = () => {
                 <Container>
                     <SectionHeader badge={'Projects'} title={'My Recent Projects'}/>
                     <Row>
-                        <Col lg={4}>
+                        <Col lg={4} className={'mb-5'}>
                             <a href="https://laratheme.com/pare-property">
-                                <img src={project1} alt="Pare-property" className='mb-3 img-fluid shadow'/>
+                                <img src={project1} alt="Pare-property" className='mb-3 img-fluid w-100 shadow'/>
                             </a>
                             <h4 className="p_color"><a href="https://laratheme.com/pare-property">Pare Property</a></h4>
                             <ul style={{columnCount: 2, columnGap: '20px'}}>
@@ -103,9 +103,9 @@ const MyPortfolio = () => {
                                 <li>CSS</li>
                             </ul>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className={'mb-5'}>
                             <a href="https://laratheme.com/megacrop">
-                                <img src={project2} alt="Megacrop" className='mb-3 img-fluid shadow'/>
+                                <img src={project2} alt="Megacrop" className='mb-3 img-fluid w-100 shadow'/>
                             </a>
                             <h4 className="p_color"><a href="https://laratheme.com/megacrop">Megacrop</a></h4>
                             <ul style={{columnCount: 2, columnGap: '20px'}}>
@@ -116,9 +116,9 @@ const MyPortfolio = () => {
                                 <li>CSS</li>
                             </ul>
                         </Col>
-                        <Col lg={4}>
+                        <Col lg={4} className={'mb-5'}>
                             <a href="https://highroi.com">
-                                <img src={project3} alt="Higheroir" className='mb-3 img-fluid shadow'/>
+                                <img src={project3} alt="Higheroir" className='mb-3 img-fluid w-100 shadow'/>
                             </a>
                             <h4 className="p_color"><a href="https://highroi.com">Higheroir</a></h4>
                             <ul style={{columnCount: 2, columnGap: '20px'}}>

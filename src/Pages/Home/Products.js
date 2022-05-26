@@ -9,14 +9,20 @@ const Products = () => {
     const {
         data: products,
         isLoading
-    } = useQuery('products', () => fetch('http://localhost:5000/products?limit=8').then(res => res.json()));
+    } = useQuery('products', () => fetch('http://localhost:5000/products?limit=8', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + localStorage.getItem('accessToken')
+        }
+    }).then(res => res.json()));
 
     if (isLoading) {
         return <Loading/>
     }
 
     return (
-        <section className="products-section py-80">
+        <section className="products-section py-80" id={'products'}>
             <Container>
                 <SectionHeader badge={'New Arival'} title={'Our Latest Production'}/>
                 <Row>

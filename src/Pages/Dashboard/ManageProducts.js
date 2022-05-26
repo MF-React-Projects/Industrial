@@ -30,7 +30,12 @@ const ManageProducts = () => {
             confirmButtonText: 'Confirm'
         }).then((result) => {
             if (result.value) {
-                axios.delete(`http://localhost:5000/product/${id}`)
+                axios.delete(`http://localhost:5000/product/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                })
                     .then(res => {
                         setProducts(products.filter(product => product._id !== id));
                         mySwal.fire({

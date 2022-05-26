@@ -22,6 +22,12 @@
             fill:$p_color;
           }
         }
+
+        @media #{$max1199} {
+          &:last-child{
+            display: none;
+          }
+        }
       }
     }
 
@@ -41,6 +47,10 @@
           }
         }
       }
+    }
+
+    @media #{$max991} {
+      display: none;
     }
   }
 

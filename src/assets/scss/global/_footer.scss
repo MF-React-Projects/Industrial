@@ -65,6 +65,10 @@
 
   .footer-right{
     text-align: right;
+
+    @media #{$max767} {
+      text-align: center;
+    }
   }
 }
 
@@ -76,9 +80,6 @@
 
 @media(max-width: 767px) {
   .footer-copyright{
-    text-align: center;
-  }
-  .footer-right{
     text-align: center;
   }
 }

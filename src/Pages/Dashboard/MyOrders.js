@@ -55,7 +55,7 @@ const MyOrders = () => {
         <div>
             <h2 className='text-center p_color mb-3'>My Orders</h2>
             {
-                (orders.length !==0) ? <Table striped bordered hover responsive>
+                (orders.length !==0) ? <div className={'table-responsive'}> <Table striped bordered hover>
                     <thead align={'center'} valign={'center'}>
                     <tr>
                         <th>#</th>
@@ -93,7 +93,7 @@ const MyOrders = () => {
                         ))
                     }
                     </tbody>
-                </Table> : <h5 className='text-center'>No Orders Found</h5>
+                </Table></div> : <h5 className='text-center'>No Orders Found</h5>
             }
         </div>
     );
