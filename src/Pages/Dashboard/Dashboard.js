@@ -5,10 +5,16 @@ import CustomLink from "../Common/CustomLink";
 import {useAuthState} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";
+import {FaUserAlt} from "@react-icons/all-files/fa/FaUserAlt";
+import {Dropdown, NavDropdown} from "react-bootstrap";
+import {signOut} from "firebase/auth";
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
     const [admin] = useAdmin(user)
+    const handleSignOut = () => {
+        signOut(auth);
+    };
     return (
         <>
             <div className="dashboard-main d-flex">
@@ -64,23 +70,28 @@ const Dashboard = () => {
                         }
                     </ul>
                     <hr/>
-                    <div className="dropdown">
-                        <a href="#" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                           id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="" width="32" height="32"
-                                 className="rounded-circle me-2"/>
-                            <strong>mdo</strong>
-                        </a>
-                        <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a className="dropdown-item" href="#">New project...</a></li>
-                            <li><a className="dropdown-item" href="#">Settings</a></li>
-                            <li><a className="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr className="dropdown-divider"/>
-                            </li>
-                            <li><a className="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
-                    </div>
+                    <NavDropdown eventKey={1}
+                                 title={
+                                     <div className="pull-left">
+                                         {
+                                             user?.photoURL?
+                                                 <img src={user?.photoURL} alt="user-profile-pic"
+                                                      className={'rounded-circle me-2'} width='50'/>
+                                                 :
+                                                 <FaUserAlt className={'me-2'}/>
+                                         }
+                                         <strong>{user?.displayName}</strong>
+                                     </div>
+                                 }
+                                 id="basic-nav-dropdown">
+                        <Dropdown.Item eventKey="1" to='/dashboard'
+                                       as={Link}>Dashboard</Dropdown.Item>
+                        <Dropdown.Item eventKey="2" to='/dashboard/my-profile' as={Link}>My
+                            Profile</Dropdown.Item>
+                        <Dropdown.Divider/>
+                        <Dropdown.Item eventKey="4"
+                                       onClick={handleSignOut}>Logout</Dropdown.Item>
+                    </NavDropdown>
                 </div>
                 <div className={'dashboard-content px-5 py-5 w-100'}>
                     <Outlet/>

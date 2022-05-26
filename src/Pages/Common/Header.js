@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Container, Nav, Navbar, Row} from "react-bootstrap";
+import {Col, Container, Nav, Navbar, Row, NavDropdown, Dropdown} from "react-bootstrap";
 import logo from '../../logo.png';
 import {Link} from "react-router-dom";
 import CustomLink from "./CustomLink";
@@ -14,10 +14,10 @@ import {FaMapMarkerAlt} from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import {useAuthState} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import {signOut} from 'firebase/auth';
+import {FaUserAlt} from "@react-icons/all-files/fa/FaUserAlt";
 
 const Header = () => {
     const [user] = useAuthState(auth);
-    console.log(user)
     const handleSignOut = () => {
         signOut(auth);
     };
@@ -29,7 +29,8 @@ const Header = () => {
                         <Row>
                             <Col lg='8'>
                                 <ul className="contact-info ms-0">
-                                    <li className="contact-info-item ps-0"><FaMapMarkerAlt/> 300 Pennsylvania Ave NW</li>
+                                    <li className="contact-info-item ps-0"><FaMapMarkerAlt/> 300 Pennsylvania Ave NW
+                                    </li>
                                     <li className="contact-info-item"><FaRegEnvelope/> info@yourdomain.com</li>
                                     <li className="contact-info-item"><FaPhoneAlt/> + 386 40 111 5555</li>
                                 </ul>
@@ -53,29 +54,45 @@ const Header = () => {
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="ms-auto">
+                            <Nav className="m-auto">
                                 <CustomLink to="/">Home</CustomLink>
                                 <CustomLink to="/blogs">Blogs</CustomLink>
                             </Nav>
-                            <div className="header-right d-flex align-items-center justify-content-center">
-                                {
-                                    user ?
-                                        <>
-                                            <CustomLink to='/dashboard'>Dashboard</CustomLink>
-                                            <div className='header-user-info d-flex align-items-center justify-content-center me-3'>
-                                                <img src={user?.photoURL} alt="user-profile-pic" className={'rounded-circle me-2'} width='50'/>
-                                                <h6 className={'mb-0'}>{user?.displayName}</h6>
-                                            </div>
-                                            <button className='btn-default btnSm' onClick={handleSignOut}>Logout</button>
-                                        </>
-                                        :
-                                        <>
-                                            <Link to={'/login'} className='btn-default btnSm'>Login</Link>
-                                            <Link to={'/register'}
-                                                  className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
-                                        </>
-                                }
-                            </div>
+                            {
+                                user ?
+                                    <>
+                                        <Nav pullRight>
+                                            <NavDropdown eventKey={1}
+                                                         title={
+                                                             <div className="pull-left">
+                                                                 {
+                                                                     user?.photoURL?
+                                                                         <img src={user?.photoURL} alt="user-profile-pic"
+                                                                              className={'rounded-circle me-2'} width='50'/>
+                                                                         :
+                                                                         <FaUserAlt className={'me-2'}/>
+                                                                 }
+                                                                 <strong>{user?.displayName}</strong>
+                                                             </div>
+                                                         }
+                                                         id="basic-nav-dropdown">
+                                                <Dropdown.Item eventKey="1" to='/dashboard'
+                                                               as={Link}>Dashboard</Dropdown.Item>
+                                                <Dropdown.Item eventKey="2" to='/dashboard/my-profile' as={Link}>My
+                                                    Profile</Dropdown.Item>
+                                                <Dropdown.Divider/>
+                                                <Dropdown.Item eventKey="4"
+                                                               onClick={handleSignOut}>Logout</Dropdown.Item>
+                                            </NavDropdown>
+                                        </Nav>
+                                    </> :
+                                    <>
+                                        <Link to={'/login'} className='btn-default btnSm'>Login</Link>
+                                        <Link to={'/register'}
+                                              className='btn-default btn-secondary ms-3 btnSm'>Register</Link>
+                                    </>
+                            }
+
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
