@@ -37,7 +37,7 @@ const ManageProducts = () => {
     }
 
     const editProduct = (id) => {
-        navigate(`/product/edit/${id}`);
+        navigate(`/dashboard/edit-product/${id}`);
     }
     return (
         <div>

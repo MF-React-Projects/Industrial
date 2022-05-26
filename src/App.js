@@ -37,7 +37,7 @@ function App() {
                     <Route path={'my-profile'} element={<MyProfile/>}/>
                     <Route path={'manage-users'} element={<RequireAdmin><ManageUsers/></RequireAdmin>}/>
                     <Route path={'add-product'} element={<RequireAdmin><AddProduct/></RequireAdmin>}/>
-                    <Route path={'edit-product'} element={<RequireAdmin><EditProduct/></RequireAdmin>}/>
+                    <Route path={'edit-product/:id'} element={<RequireAdmin><EditProduct/></RequireAdmin>}/>
                     <Route path={'manage-products'} element={<RequireAdmin><ManageProducts/></RequireAdmin>}/>
                 </Route>
                 <Route path='/login' element={<Login/>}/>
