@@ -41,8 +41,13 @@ const Dashboard = () => {
 
                         {admin && <>
                             <li>
+                                <CustomLink to='/dashboard/manage-orders'>
+                                    Manage All Orders
+                                </CustomLink>
+                            </li>
+                            <li>
                                 <CustomLink to='/dashboard/manage-users'>
-                                    Manage Users
+                                    Manage All Users
                                 </CustomLink>
                             </li>
                             <li>

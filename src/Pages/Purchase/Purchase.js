@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import {Col, Container, Row} from "react-bootstrap";
@@ -16,6 +16,7 @@ const Purchase = () => {
     const [btnDisabled, setBtnDisabled] = useState(false);
     const [user] = useAuthState(auth);
     const {image, name, shortDescription, price, minQuantity, inStock} = product;
+    const navigate = useNavigate();
     //sweetalert
     const mySwal = withReactContent(Swal);
 
@@ -45,7 +46,11 @@ const Purchase = () => {
         const orderData = {
             productId: id,
             ...data,
+            productName: name,
+            productImage: image,
+            productPrice: price,
             totalPrice: price * data.qty,
+            status: 'unpaid'
         };
         fetch('http://localhost:5000/order', {
             method: 'POST',
@@ -68,7 +73,9 @@ const Purchase = () => {
                                     text: 'Your order has been placed successfully',
                                     icon: 'success',
                                     confirmButtonText: 'OK'
-                                });
+                                }).then(() => {
+                                    navigate('/dashboard/my-orders');
+                                })
                                 setProduct({...product, inStock: inStock - data.qty});
                                 setBtnDisabled(false);
                                 reset();

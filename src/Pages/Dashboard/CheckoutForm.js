@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
 import Loading from "../Common/Loading";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
 
 const CheckoutForm = ({order}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [success, setSuccess] = useState(false);
     const [processing, setProcessing] = useState(false);
-    const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
+    const mySwal = withReactContent(Swal);
+    const navigate = useNavigate();
 
     const {_id, totalPrice, name, email} = order;
 
@@ -18,8 +22,9 @@ const CheckoutForm = ({order}) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': 'Bearer ' + localStorage.getItem('accessToken')
             },
-            body: JSON.stringify(totalPrice)
+            body: JSON.stringify({totalPrice})
         })
             .then(res => res.json())
             .then(data => {
@@ -42,7 +47,7 @@ const CheckoutForm = ({order}) => {
         });
 
         setCardError(error?.message || '');
-        setSuccess('');
+        setSuccess(false);
         setProcessing(true);
 
         //confirm payment
@@ -61,18 +66,29 @@ const CheckoutForm = ({order}) => {
 
         if(intentError) {
             setCardError(intentError?.message);
-            setSuccess('');
+            setSuccess(false);
             setProcessing(false);
         } else {
             setCardError('');
-            setTransactionId(paymentIntent.id);
-            setSuccess('Congratulations! Your payment is completed.');
+            //sweet alert
+            mySwal.fire({
+                title: 'Payment Successful',
+                text: 'Your payment is successful. Your transaction Id is ' + paymentIntent.id,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+                .then(() => {
+                    setSuccess(true);
+                    setProcessing(false);
+                    navigate('/dashboard/my-orders');
+                })
 
             //store payment details in database
             fetch(`http://localhost:5000/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    'authorization': 'Bearer ' + localStorage.getItem('accessToken')
                 },
                 body: JSON.stringify({
                     order: _id,
@@ -112,12 +128,6 @@ const CheckoutForm = ({order}) => {
             </form>
             {
                 cardError && <small className='text-danger'>{cardError}</small>
-            }
-            {
-                success && <>
-                    <p className={'text-success'}>{success}</p>
-                    <p><strong>Your transaction Id:</strong> {transactionId}</p>
-                </>
             }
         </>
     );

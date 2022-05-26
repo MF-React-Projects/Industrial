@@ -13,7 +13,13 @@ const MyOrders = () => {
     const navigate = useNavigate();
     const mySwal = withReactContent(Swal);
     const {data: orders, isLoading, refetch} = useQuery('orders', async () => {
-        const response = await fetch(`http://localhost:5000/orders/${user?.email}`);
+        const response = await fetch(`http://localhost:5000/orders/${user?.email}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
         return await response.json();
     });
 
@@ -53,10 +59,9 @@ const MyOrders = () => {
                     <thead align={'center'} valign={'center'}>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>Product</th>
                         <th>Quantity</th>
+                        <th>Total Price</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -65,13 +70,24 @@ const MyOrders = () => {
                         orders.map((order, index) => (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td>{order.name}</td>
-                                <td>{order.email}</td>
-                                <td>{order.phone}</td>
-                                <td>{order.qty}</td>
                                 <td>
-                                    <button className='btn btn-danger btn-sm me-2' onClick={() => handleCancel(order)}>Cancel</button>
-                                    <button className='btn btn-primary btn-sm' onClick={() => navigate(`/dashboard/payment/${order._id}`)}>Pay</button>
+                                    <div className="d-flex align-items-center">
+                                        <img src={order.productImage} alt={order.productName} width={'60px'}/>
+                                        <h6 className={'ms-2 mb-0'}>{order.productName}</h6>
+                                    </div>
+                                </td>
+                                <td>{order.qty}</td>
+                                <td>{order.totalPrice}</td>
+                                <td>
+                                    {
+                                        !order.paid ?
+                                            <>
+                                                <button className='btn btn-danger btn-sm me-2' onClick={() => handleCancel(order)}>Cancel</button>
+                                                <button className='btn btn-primary btn-sm' onClick={() => navigate(`/dashboard/payment/${order._id}`)}>Pay</button>
+                                            </> :
+                                            <span className='badge bg-success py-2 px-3'>Paid</span>
+                                    }
+
                                 </td>
                             </tr>
                         ))

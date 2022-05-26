@@ -11,34 +11,21 @@ const stripePromise = loadStripe('pk_test_hNWYmz6pmum0Z3ywANVmTzbA00fSin7xRC');
 
 const Payment = () => {
     const {id} = useParams();
-    const [order, setOrder] = useState({});
 
-    useEffect(() => {
-        const fetchOrder = async () => {
-            const response = await fetch(`http://localhost:5000/order/${id}`);
-            const data = await response.json();
-            setOrder(data);
-        };
-        fetchOrder();
-    }, [id]);
-
-    // const {data: order, isLoading} = useQuery(['order', id], () => fetch(`http://localhost:5000/order/${id}`)
-    //     .then(res => res.json()));
-
-    const {productId, name, email} = order;
-
-    const {data: product, isLoading: isLoadingProduct} = useQuery(['product', productId], () => {
-        return fetch(`http://localhost:5000/product/${productId}`, {
+    const {data: order, isLoading} = useQuery(['order', id], () =>{
+        return fetch(`http://localhost:5000/order/${id}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => res.json())
     })
 
-    if (isLoadingProduct) return <Loading/>;
+    if(isLoading) return <Loading/>
 
+    const {productName, productImage, productPrice, totalPrice, qty} = order;
     return (
         <div className={'payment py-3 px-3'}>
             <Row>
@@ -47,13 +34,13 @@ const Payment = () => {
                         <h3 className={'mb-3 p_color'}>Order Review</h3>
                         <div className="order-review-item d-flex align-items-center">
                             <div className="order-review-item-img me-3">
-                                <img src={product.image} alt="" width={150}/>
+                                <img src={productImage} alt="" width={150}/>
                             </div>
                             <div className="order-review-item-info">
-                                <h4>{product.name}</h4>
-                                <p className='mb-2'>Quantity: {order.qty}</p>
-                                <p className='mb-2'>Price: ${product.price}</p>
-                                <p className='mb-2'>Total: ${product.price * order.qty}</p>
+                                <h4>{productName}</h4>
+                                <p className='mb-2'>Quantity: {qty}</p>
+                                <p className='mb-2'>Price: ${productPrice}</p>
+                                <p className='mb-2'>Total: ${totalPrice}</p>
                             </div>
                         </div>
                     </div>
