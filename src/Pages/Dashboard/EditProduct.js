@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {useAuthState} from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
@@ -12,7 +10,6 @@ const EditProduct = () => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
     const navigate = useNavigate();
-    const [user] = useAuthState(auth);
     const mySwal = withReactContent(Swal);
 
     const {name, price, image, inStock, minQuantity, shortDescription} = product;

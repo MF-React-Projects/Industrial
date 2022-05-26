@@ -1,10 +1,7 @@
 import React from 'react';
 import logo from '../../logo.png';
-import {FaHome} from "@react-icons/all-files/fa/FaHome";
 import {Link, Outlet} from "react-router-dom";
-import {AiFillDashboard} from "@react-icons/all-files/ai/AiFillDashboard";
 import CustomLink from "../Common/CustomLink";
-import {Container, Navbar, Nav, NavDropdown} from "react-bootstrap";
 import {useAuthState} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import useAdmin from "../../hooks/useAdmin";

@@ -20,28 +20,42 @@ const ManageProducts = () => {
 
     const deleteProduct = (id) => {
         //confirm before delete
-        const confirm = window.confirm("Are you sure you want to delete this product?");
-        if (confirm) {
-            axios.delete(`http://localhost:5000/products/${id}`)
-                .then(res => {
-                    setProducts(products.filter(product => product._id !== id));
-                    mySwal.fire({
-                        title: "Deleted!",
-                        text: "Product has been deleted successfully",
-                        icon: "success",
-                        confirmButtonText: "OK"
-                    });
-                })
-                .catch(err => console.log(err));
-        }
+        mySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.value) {
+                axios.delete(`http://localhost:5000/product/${id}`)
+                    .then(res => {
+                        setProducts(products.filter(product => product._id !== id));
+                        mySwal.fire({
+                            title: "Deleted!",
+                            text: "Product has been deleted successfully",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        });
+                    })
+                    .catch(err => console.log(err));
+            }
+        });
+
     }
 
     const editProduct = (id) => {
         navigate(`/dashboard/edit-product/${id}`);
     }
+
     return (
         <div>
-            <h2 className='text-center p_color mb-3'>Manage Products</h2>
+            <div className="d-flex align-items-center justify-content-between mb-4">
+                <h2 className='text-center mb-0 p_color'>Manage Products</h2>
+                <button className='btn-default btnSm' onClick={() => navigate('/dashboard/add-product')}>Add Product</button>
+            </div>
             <Table striped bordered hover responsive>
                 <thead align={'center'} valign={'center'}>
                 <tr>
