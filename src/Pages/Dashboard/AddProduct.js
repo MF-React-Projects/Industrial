@@ -10,32 +10,45 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const mySwal = withReactContent(Swal);
     const {register, formState: {errors}, handleSubmit, reset} = useForm();
+    const imageStorageKey = 'f9cdde2041acd37841b53910325aacd3';
 
     const onSubmit = data => {
-        const product = {
-            name: data.productName,
-            price: data.productPrice,
-            image: data.productThumb,
-            minQuantity: data.productMinQuantity,
-            inStock: data.productQty,
-            shortDescription: data.productShortDescription,
-        }
-        if (data.productName && data.productPrice && data.productThumb && data.productMinQuantity && data.productQty && data.productShortDescription) {
-            axios.post('http://localhost:5000/products', product)
-                .then(res => {
-                    mySwal.fire({
-                        title: 'Product Added',
-                        text: 'Product has been added successfully',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        navigate('/dashboard/manage-products');
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }
+        const img = data.productThumb[0];
+        const formData = new FormData();
+        formData.append('image', img);
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const thumbnail = result.data.url;
+                    const product = {
+                        name: data.productName,
+                        price: data.productPrice,
+                        image: thumbnail,
+                        minQuantity: data.productMinQuantity,
+                        inStock: data.productQty,
+                        shortDescription: data.productShortDescription,
+                    }
+                    axios.post('http://localhost:5000/products', product)
+                        .then(res => {
+                            mySwal.fire({
+                                title: 'Product Added',
+                                text: 'Product has been added successfully',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                navigate('/dashboard/manage-products');
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
     }
 
     return (
@@ -97,8 +110,13 @@ const AddProduct = () => {
                     <Col lg={12}>
                         <div className='form-group mb-3'>
                             <label htmlFor="productThumb" className="form-label">Product Thumbnail</label>
-                            <input className='form-control'
-                                   placeholder='Enter product thumbnail url' {...register("productThumb", {required: true})} />
+                            <input type="file" className='form-control'
+                                   placeholder='Enter product thumbnail url' {...register("productThumb", {
+                                required: {
+                                    value: true,
+                                    message: 'Image is Required'
+                                }
+                            })} />
                             <small
                                 className='text-danger'>{errors.productThumb?.type === 'required' && "Product thumbnail url is required"}</small>
                         </div>
