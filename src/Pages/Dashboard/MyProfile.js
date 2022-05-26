@@ -28,6 +28,10 @@ const MyProfile = () => {
                 city: res.data?.city,
                 state: res.data?.state,
                 zip: res.data?.zip,
+                education: res.data?.education,
+                fbLink: res.data?.fbLink,
+                twitterLink: res.data?.twitterLink,
+                linkedinLink: res.data?.linkedinLink,
             })
         });
     });
@@ -40,6 +44,10 @@ const MyProfile = () => {
             city: userData?.city,
             state: userData?.state,
             zip: userData?.zip,
+            education: userData?.education,
+            fbLink: userData?.fbLink,
+            twitterLink: userData?.twitterLink,
+            linkedinLink: userData?.linkedinLink,
         }
     });
     const mySwal = withReactContent(Swal);
@@ -71,27 +79,6 @@ const MyProfile = () => {
                 confirmButtonText: 'OK'
             })
         }
-        /*const {name, email} = data;
-        const user = auth.currentUser;
-        const credential = auth.EmailAuthProvider.credential(email, user.email);
-        try {
-            await user.reauthenticateWithCredential(credential);
-            await user.updateProfile({displayName: name});
-            await user.updateEmail(email);
-            mySwal.fire({
-                title: 'Success',
-                text: 'Your profile has been updated',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        } catch (e) {
-            mySwal.fire({
-                title: 'Error',
-                text: e.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }*/
     };
 
     if (isLoading) return <Loading/>
@@ -196,6 +183,41 @@ const MyProfile = () => {
                 <div className="col-md-2">
                     <label htmlFor="inputZip" className="form-label">Zip</label>
                     <input type="text" className="form-control" id="inputZip" {...register("zip")}/>
+                </div>
+                <div className="col-12">
+                    <label className="form-label">Education</label>
+                    <textarea
+                        placeholder="Enter your education"
+                        className="form-control"
+                        {...register("education")}
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label className="form-label">Facebook profile link</label>
+                    <input
+                        type='text'
+                        placeholder="Enter your facebook profile link"
+                        className="form-control"
+                        {...register("fbLink")}
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label className="form-label">Twitter profile link</label>
+                    <input
+                        type='text'
+                        placeholder="Enter your twitter profile link"
+                        className="form-control"
+                        {...register("twitterLink")}
+                    />
+                </div>
+                <div className="col-md-4">
+                    <label className="form-label">Linkedin profile link</label>
+                    <input
+                        type='text'
+                        placeholder="Enter your linkedin profile link"
+                        className="form-control"
+                        {...register("linkedinLink")}
+                    />
                 </div>
                 <div className="col-12">
                     <button className='btn-default mb-3' type="submit">Update Profile</button>
