@@ -117,10 +117,10 @@ const MyPortfolio = () => {
                             </ul>
                         </Col>
                         <Col lg={4} className={'mb-5'}>
-                            <a href="https://highroi.com">
+                            <a href="https://laratheme.com/highroier">
                                 <img src={project3} alt="Higheroir" className='mb-3 img-fluid w-100 shadow'/>
                             </a>
-                            <h4 className="p_color"><a href="https://highroi.com">Higheroir</a></h4>
+                            <h4 className="p_color"><a href="https://laratheme.com/highroier">Higheroir</a></h4>
                             <ul style={{columnCount: 2, columnGap: '20px'}}>
                                 <li>WordPress</li>
                                 <li>Tailwind</li>

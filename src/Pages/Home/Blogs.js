@@ -20,6 +20,9 @@ const Blogs = () => {
                         blogs.map(blog => <Blog key={blog._id} blog={blog}/>)
                     }
                 </Row>
+                <div className="text-center">
+                    <button className='btn-default' onClick={() => navigate('/blogs')}>View All News</button>
+                </div>
             </Container>
         </section>
     );
