@@ -1,8 +1,14 @@
-# Industrial React Web App
+## [Industrial React Web App](https://industrial-4c896.firebaseapp.com/)
 
 It is a single page application made with ReactJS, React Bootstrap,Route, Firebase, node, express, mongodb, CSS etc...
 
-#### Project Featured:
+![GitHub repo size](https://img.shields.io/github/repo-size/MF-React-Projects/Industrial?style=plastic)
+![GitHub language count](https://img.shields.io/github/languages/count/MF-React-Projects/Industrial?style=plastic)
+![GitHub top language](https://img.shields.io/github/languages/top/MF-React-Projects/Industrial?style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/MF-React-Projects/Industrial?color=red&style=plastic)
+
+
+#### Project Features:
 
 - Tools purchase website including admin & user panel.
 - All User can `Edit their profile`, `Add review`, and see their `order history`.
