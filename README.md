@@ -37,5 +37,5 @@ It is a single page application made with ReactJS, React Bootstrap,Route, Fireba
 **Email:** admin@demo.com <br>
 **Password:** 123456
 
-### Design & Developed By
-**_[Mehedi Foysal](https://github.com/mehedifoysal)_**
+---
+Design and developed by **[Mehedi Foysal](https://github.com/mehedifoysal)**

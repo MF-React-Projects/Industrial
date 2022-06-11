@@ -12,6 +12,7 @@ const MyOrders = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const mySwal = withReactContent(Swal);
+
     const {data: orders, isLoading, refetch} = useQuery('orders', async () => {
         const response = await fetch(`https://immense-savannah-85373.herokuapp.com/orders/${user?.email}`, {
             method: 'GET',

@@ -58,6 +58,7 @@ const Header = () => {
                             <Nav className="m-auto">
                                 <CustomLink to="/">Home</CustomLink>
                                 <CustomLink to="/blogs">Blogs</CustomLink>
+                                {user && <CustomLink to="/dashboard">Dashboard</CustomLink>}
                                 <CustomLink to="/my-portfolio">My Portfolio</CustomLink>
                             </Nav>
                             {
@@ -68,9 +69,11 @@ const Header = () => {
                                                          title={
                                                              <div className="pull-left">
                                                                  {
-                                                                     user?.photoURL?
-                                                                         <img src={user?.photoURL} alt="user-profile-pic"
-                                                                              className={'rounded-circle me-2'} width='50'/>
+                                                                     user?.photoURL ?
+                                                                         <img src={user?.photoURL}
+                                                                              alt="user-profile-pic"
+                                                                              className={'rounded-circle me-2'}
+                                                                              width='50'/>
                                                                          :
                                                                          <FaUserAlt className={'me-2'}/>
                                                                  }

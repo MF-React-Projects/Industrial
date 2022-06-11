@@ -35,11 +35,6 @@ const Dashboard = () => {
                     <hr/>
                     <ul className="nav nav-pills flex-column mb-auto ms-0">
                         <li>
-                            <CustomLink to='/dashboard'>
-                                Dashboard
-                            </CustomLink>
-                        </li>
-                        <li>
                             <CustomLink to='/dashboard/my-orders'>
                                 My Orders
                             </CustomLink>
@@ -109,11 +104,6 @@ const Dashboard = () => {
                         <img src={favicon} alt="" width={25}/>
                     </a>
                     <ul className="nav nav-pills nav-flush flex-column mb-auto text-center m-0">
-                        <li className="nav-item">
-                            <CustomLink to='/dashboard' className="nav-link py-3 border-bottom" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
-                                <IoSpeedometerOutline/>
-                            </CustomLink>
-                        </li>
                         <li className="nav-item">
                             <CustomLink to='/dashboard/my-orders' className="nav-link py-3 border-bottom" title="My Orders" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <BsTable/>
