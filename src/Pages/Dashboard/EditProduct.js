@@ -26,7 +26,7 @@ const EditProduct = () => {
 
     useEffect(() => {
         const getProduct = async () => {
-            await axios.get(`https://immense-savannah-85373.herokuapp.com/product/${id}`, {
+            await axios.get(`https://industrial.onrender.com/product/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -59,7 +59,7 @@ const EditProduct = () => {
             shortDescription: data.productShortDescription,
         }
         if (data.productName && data.productPrice && data.productThumb && data.productMinQuantity && data.productQty && data.productShortDescription) {
-            axios.put(`https://immense-savannah-85373.herokuapp.com/product/edit/${id}`, product, {
+            axios.put(`https://industrial.onrender.com/product/edit/${id}`, product, {
                 headers: {
                     'Content-Type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`

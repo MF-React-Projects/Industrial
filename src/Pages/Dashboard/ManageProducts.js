@@ -11,7 +11,7 @@ const ManageProducts = () => {
     const mySwal = withReactContent(Swal);
 
     useEffect(() => {
-        axios.get("https://immense-savannah-85373.herokuapp.com/products")
+        axios.get("https://industrial.onrender.com/products")
             .then(res => {
                 setProducts(res.data);
             })
@@ -30,7 +30,7 @@ const ManageProducts = () => {
             confirmButtonText: 'Confirm'
         }).then((result) => {
             if (result.value) {
-                axios.delete(`https://immense-savannah-85373.herokuapp.com/product/${id}`, {
+                axios.delete(`https://industrial.onrender.com/product/${id}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'authorization': `Bearer ${localStorage.getItem('accessToken')}`

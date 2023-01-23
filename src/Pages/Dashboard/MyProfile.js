@@ -13,7 +13,7 @@ import Loading from "../Common/Loading";
 const MyProfile = () => {
     const [user] = useAuthState(auth);
     const {data: userData, isLoading} = useQuery(["user", user.email], () => {
-        return axios.get(`https://immense-savannah-85373.herokuapp.com/user/${user.email}`, {
+        return axios.get(`https://industrial.onrender.com/user/${user.email}`, {
             headers: {
                 "Content-Type": "application/json",
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -57,7 +57,7 @@ const MyProfile = () => {
         }
         //insert data to database
         try {
-            const response = await axios.put(`https://immense-savannah-85373.herokuapp.com/user/${user.email}`, userData, {
+            const response = await axios.put(`https://industrial.onrender.com/user/${user.email}`, userData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`

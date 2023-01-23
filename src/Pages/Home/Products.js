@@ -9,7 +9,7 @@ const Products = () => {
     const {
         data: products,
         isLoading
-    } = useQuery('products', () => fetch('https://immense-savannah-85373.herokuapp.com/products?limit=8', {
+    } = useQuery('products', () => fetch('https://industrial.onrender.com/products?limit=8', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

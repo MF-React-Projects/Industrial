@@ -33,7 +33,7 @@ const AddProduct = () => {
                         inStock: data.productQty,
                         shortDescription: data.productShortDescription,
                     }
-                    axios.post('https://immense-savannah-85373.herokuapp.com/products', product, {
+                    axios.post('https://industrial.onrender.com/products', product, {
                         headers:{
                             'Content-Type': 'application/json',
                             'authorization': 'Bearer ' + localStorage.getItem('accessToken')

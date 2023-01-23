@@ -18,7 +18,7 @@ const CheckoutForm = ({order}) => {
     const {_id, totalPrice, name, email} = order;
 
     useEffect(() => {
-        fetch('https://immense-savannah-85373.herokuapp.com/create-payment-intent', {
+        fetch('https://industrial.onrender.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const CheckoutForm = ({order}) => {
                 })
 
             //store payment details in database
-            fetch(`https://immense-savannah-85373.herokuapp.com/order/${_id}`, {
+            fetch(`https://industrial.onrender.com/order/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

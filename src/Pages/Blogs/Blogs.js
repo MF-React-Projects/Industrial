@@ -11,7 +11,7 @@ const Blogs = () => {
     const {
         data: blogs,
         isLoading
-    } = useQuery('blogs', () => fetch('https://immense-savannah-85373.herokuapp.com/blogs').then(res => res.json()));
+    } = useQuery('blogs', () => fetch('https://industrial.onrender.com/blogs').then(res => res.json()));
     if (isLoading) return <Loading/>
 
     return (
